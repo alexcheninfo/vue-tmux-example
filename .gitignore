@@ -1,0 +1,7 @@
+node_modules
+build
+.DS_Store
+cache
+dist
+release
+*.log
