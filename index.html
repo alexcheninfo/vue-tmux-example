@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <script>
-      // Make Electron available inside Vue
+      // make Electron available inside Vue
       // TODO find a way to do it without using global variables
-      window.electron = require('electron')
-      window.remote = require('remote')
+      // need the if statment to remove error in brower
+      if (typeof require === 'function') {
+        window.electron = require('electron')
+        window.remote = require('remote')
+      }
     </script>
     <!-- // <script src="http://localhost:8080/webpack-dev-server.js"></script> -->
   </head>
