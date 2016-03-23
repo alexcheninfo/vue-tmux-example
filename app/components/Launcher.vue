@@ -26,27 +26,31 @@ export default {
 
 ul {
   background: $dark-gray
-  border-right: $border-size solid darken($dark-brown, $shadow-normal)
   margin: 0
   padding: 10px
   position: absolute
   top: 0
   left: 0
   height: 100%
+  z-index: 9999
+  box-shadow($shadow-size 0 0 0)
 
   li {
     display: block
-    margin: 0 0 5px
+    margin: 0 0 8px
     text-align: center
-  }
 
-  img {
-    filter-drop-shadow(0, $border-size, 0, darken($dark-gray, $shadow-normal))
-
-    &:hover {
-      filter-drop-shadow(0, $border-size, 0, darken($dark-gray, $shadow-active))
+    &:last-child {
+      margin: 0
     }
 
+    img {
+      filter-drop-shadow(0, $border-size, 0, darken($dark-gray, $shadow-normal))
+
+      &:hover {
+        filter-drop-shadow(0, $border-size, 0, darken($dark-gray, $shadow-active))
+      }
+    }
   }
 }
 </style>

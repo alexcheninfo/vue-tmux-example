@@ -1,3 +1,15 @@
+border-radius($radius) {
+  -webkit-border-radius: $radius
+  -moz-border-radius: $radius
+  border-radius: $radius
+}
+
+box-shadow($shadow-size) {
+  -webkit-box-shadow: $shadow-size rgba(0,0,0,0.2)
+  -moz-box-shadow: $shadow-size rgba(0,0,0,0.2)
+  box-shadow: $shadow-size rgba(0,0,0,0.2)
+}
+
 filter-drop-shadow($offset-x, $offset-y, $blur-radius, $color) {
   -webkit-filter: drop-shadow($offset-x $offset-y $blur-radius $color)
   filter: drop-shadow($offset-x $offset-y $blur-radius $color)
