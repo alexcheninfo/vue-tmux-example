@@ -1,7 +1,7 @@
 <template>
   <article>
     <header>
-      <h4>Hardcoded Title</h4>
+      <h4><i class="fa fa-circle"></i>Hardcoded Title</h4>
     </header>
     <section>
       <slot></slot>
@@ -21,7 +21,7 @@ article {
   width: 600px
   height: 400px
   border-radius($radius-size)
-  box-shadow(0 $shadow-size 0 0)
+  box-shadow(0 $shadow-size, 0 0, $shadow-color)
 
   header {
     background-color: $dark-gray
@@ -33,6 +33,11 @@ article {
       color: $white
       margin: 0
       text-align: center
+
+      i {
+        color: $green // temporary
+        margin: 0 5px 0 0
+      }
     }
   }
 

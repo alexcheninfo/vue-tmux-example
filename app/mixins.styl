@@ -4,13 +4,14 @@ border-radius($radius) {
   border-radius: $radius
 }
 
-box-shadow($shadow-size) {
-  -webkit-box-shadow: $shadow-size rgba(0,0,0,0.2)
-  -moz-box-shadow: $shadow-size rgba(0,0,0,0.2)
-  box-shadow: $shadow-size rgba(0,0,0,0.2)
+box-shadow($pos, $size, $color) {
+  -webkit-box-shadow: $pos $size $color
+  -moz-box-shadow: $pos $size $color
+  box-shadow: $pos $size $color
 }
 
-filter-drop-shadow($offset-x, $offset-y, $blur-radius, $color) {
-  -webkit-filter: drop-shadow($offset-x $offset-y $blur-radius $color)
-  filter: drop-shadow($offset-x $offset-y $blur-radius $color)
+filter-drop-shadow($pos, $size, $color) {
+  -webkit-filter: drop-shadow($pos $size $color)
+  -moz-filter: drop-shadow($pos $size $color)
+  filter: drop-shadow($pos $size $color)
 }
