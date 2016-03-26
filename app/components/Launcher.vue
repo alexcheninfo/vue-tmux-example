@@ -33,7 +33,7 @@ ul {
   left: 0
   height: 100%
   z-index: 9999
-  box-shadow($shadow-size 0, 0 0, $shadow-color)
+  box-shadow($shadow-size 0, $shadow-blur, $shadow-color)
 
   li {
     display: block
@@ -45,16 +45,10 @@ ul {
     }
 
     img {
-      filter-drop-shadow(0 $shadow-size, 0, $shadow-color)
-      /*filter: brightness(100%) // the filter above is being overriden with this*/
-      /*-webkit-filter: brightness(100%)*/
-      /*transition: all .0 filter linear
-      -webkit-transition: .0 -webkit-filter linear*/
+      filter-drop-shadow(0 $shadow-size, $shadow-blur, $shadow-color)
 
       &:hover {
-        filter-drop-shadow(0 $shadow-size, 2px, $shadow-color)
-        /*filter: brightness(90%)
-        -webkit-filter: brightness(90%)*/
+        filter-drop-shadow(0 $shadow-size, $shadow-blur, $shadow-color)
       }
     }
   }

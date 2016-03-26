@@ -10,7 +10,9 @@
     "build": "electron-packager . uno --platform=linux --arch=x64 --version=0.37.2 --icon='./resources/icon.png'"
   },
   "dependencies": {
-    "font-awesome": "^4.5.0"
+    "font-awesome": "^4.5.0",
+    "jquery": "^2.2.2",
+    "jquery-ui": "^1.10.5"
   },
   "devDependencies": {
     "babel-core": "^5.8.33",

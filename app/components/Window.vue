@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article v-draggable>
     <header>
       <h4><i class="fa fa-circle"></i>Hardcoded Title</h4>
     </header>
@@ -8,6 +8,14 @@
     </section>
   </article>
 </template>
+
+<script>
+export default {
+  ready () {
+    // some code
+  }
+}
+</script>
 
 <style lang="stylus" scoped>
 @import '../variables'
@@ -20,12 +28,11 @@ article {
   left: 80px
   width: 600px
   height: 400px
-  border-radius($radius-size)
-  box-shadow(0 $shadow-size, 0 0, $shadow-color)
+  border-radius($radius-size + 2) // two more pixels to hide the top border
+  box-shadow(0 $shadow-size, $shadow-blur, $shadow-color)
 
   header {
     background-color: $dark-gray
-    margin-top: -1px // to cover the top border of article
     padding: 5px 0
     border-radius($radius-size $radius-size 0 0)
 
