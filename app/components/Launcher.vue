@@ -1,20 +1,52 @@
 <template>
   <ul>
-    <li v-for="icon in icons">
-      <a href="#"><img :src="icon.image"></a>
+    <li v-for="app in apps">
+      <a @click="openWindow(app)"><img :src="app.icon"></a>
     </li>
   </ul>
 </template>
 
 <script>
+import store from '../store'
+
 export default {
   data () {
     return {
-      icons: [
-        { image: require('../assets/images/icon-1.png') },
-        { image: require('../assets/images/icon-2.png') },
-        { image: require('../assets/images/icon-3.png') }
-      ]
+      apps: [
+        {
+          icon: require('../assets/images/icon-1.png'),
+          name: 'App 1',
+          color: '#687d77'
+        },
+        {
+          icon: require('../assets/images/icon-2.png'),
+          name: 'App 2',
+          color: '#a4b765'
+        },
+        {
+          icon: require('../assets/images/icon-3.png'),
+          name: 'App 3',
+          color: '#6e716d'
+        }
+      ],
+      state: store.state
+    }
+  },
+
+  computed: {
+    windows () {
+      return this.state.windows
+    }
+  },
+
+  methods: {
+    openWindow (app) {
+      const window = {
+        title: app.name,
+        color: app.color
+      }
+
+      this.windows.push(window)
     }
   }
 }
@@ -46,10 +78,6 @@ ul {
 
     img {
       filter-drop-shadow(0 $shadow-size, $shadow-blur, $shadow-color)
-
-      &:hover {
-        filter-drop-shadow(0 $shadow-size, $shadow-blur, $shadow-color)
-      }
     }
   }
 }

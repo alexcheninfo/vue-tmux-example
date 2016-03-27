@@ -1,7 +1,8 @@
 <template>
-  <article v-draggable>
+  <!-- <article v-draggable> -->
+  <article class="modal">
     <header>
-      <h4><i class="fa fa-circle"></i>Hardcoded Title</h4>
+      <h4><i class="fa fa-circle" :style="'color:' + color"></i>{{ title }}</h4>
     </header>
     <section>
       <slot></slot>
@@ -11,8 +12,9 @@
 
 <script>
 export default {
-  ready () {
-    // some code
+  props: {
+    title: String,
+    color: String
   }
 }
 </script>
@@ -23,10 +25,14 @@ export default {
 
 article {
   background-color: $white
-  position: absolute
-  top: 30px
-  left: 80px
-  width: 600px
+  /*position: absolute
+  top: 15px
+  left: 82px
+  right: 12px*/
+  margin-top: 15px
+  margin-right: 15px
+  margin-bottom: 15px
+  margin-left: 68px + 15px // Launcher's width plus margin
   height: 400px
   border-radius($radius-size + 2) // two more pixels to hide the top border
   box-shadow(0 $shadow-size, $shadow-blur, $shadow-color)
@@ -42,7 +48,6 @@ article {
       text-align: center
 
       i {
-        color: $green // temporary
         margin: 0 5px 0 0
       }
     }
