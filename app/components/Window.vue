@@ -2,7 +2,10 @@
   <!-- <article v-draggable> -->
   <article class="modal" transition>
     <header>
-      <h4><i class="fa fa-circle" :style="'color:' + color"></i>{{ title }}</h4>
+      <h4>
+        <i class="fa fa-circle" :style="'color:' + color"></i>
+        {{ title }}
+      </h4>
     </header>
     <section>
       <slot></slot>

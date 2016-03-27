@@ -12,9 +12,5 @@ export const draggable = {
       // const x = thisPos.left - parentPos.left
       // const y = thisPos.top - parentPos.top
     }
-  },
-
-  update (value) {
-    // some code
   }
 }

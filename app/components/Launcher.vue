@@ -1,15 +1,26 @@
 <template>
-  <ul>
-    <li v-for="app in apps">
-      <a @click="openWindow(app)"><img :src="app.icon"></a>
-    </li>
-  </ul>
+  <nav>
+    <ul>
+      <li v-for="app in apps">
+        <a @click="openWindow(app)" @contextmenu="openMenu">
+          <img :src="app.icon">
+        </a>
+        <menu @focusout="closeMenu"></menu>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script>
+import $ from 'jquery'
 import store from '../store'
+import Menu from '../components/Menu'
 
 export default {
+  components: {
+    Menu
+  },
+
   data () {
     return {
       apps: [
@@ -29,6 +40,7 @@ export default {
           color: '#6e716d'
         }
       ],
+      menuToggled: false,
       state: store.state
     }
   },
@@ -47,6 +59,23 @@ export default {
       }
 
       this.windows.push(window)
+    },
+
+    openMenu (ev) {
+      ev.preventDefault()
+      const $icon = $(ev.currentTarget)
+      const $menu = $icon.next()
+      const mouseX = ev.offsetX
+      const mouseY = ev.offsetY
+      $menu.css('top', mouseY + 'px')
+      $menu.css('left', mouseX + 'px')
+      $menu.show()
+      $menu.focus()
+    },
+
+    closeMenu (ev) {
+      const $menu = $(ev.currentTarget)
+      $menu.hide()
     }
   }
 }
@@ -56,30 +85,32 @@ export default {
 @import '../variables'
 @import '../mixins'
 
-ul {
-  background: $dark-gray
-  margin: 0
-  padding: 10px
-  position: absolute
-  top: 0
-  left: 0
-  height: 100%
-  z-index: 9999
-  box-shadow($shadow-size 0, $shadow-blur, $shadow-color)
+nav {
+  > ul {
+    background: $dark-gray
+    padding: $padding-size
+    position: absolute
+    top: 0
+    left: 0
+    height: 100%
+    list-style($style-type)
+    box-shadow($shadow-size 0, $shadow-blur, $shadow-color)
 
-  li {
-    display: block
-    margin: 0 0 8px
-    text-align: center
-
-    &:last-child {
-      margin: 0
-    }
-
-    img {
+    li {
+      display: block
+      margin: 0 0 8px
+      text-align: center
+      position: relative
       transition($transition-duration)
-      filter-drop-shadow(0 $shadow-size, $shadow-blur, $shadow-color)
       bob-hover($transition-position, 0)
+
+      &:last-child {
+        margin: 0
+      }
+
+      img {
+        filter-drop-shadow(0 $shadow-size, $shadow-blur, $shadow-color)
+      }
     }
   }
 }

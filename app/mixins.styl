@@ -1,5 +1,11 @@
 /* Basic */
 
+list-style($list-style) {
+  list-style-type: $list-style
+  margin: 0
+  text-align: left
+}
+
 border-radius($radius) {
   -webkit-border-radius: $radius
   -moz-border-radius: $radius
@@ -22,6 +28,7 @@ filter-drop-shadow($position, $size, $color) {
 
 bob-hover($position) {
   &:hover {
+    z-index: 9999
     -webkit-transform: translate($position)
     transform: translate($position)
   }
