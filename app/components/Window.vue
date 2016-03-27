@@ -38,7 +38,7 @@ article {
   margin-left: 68px + 15px // Launcher's width plus margin
   height: 400px
   border-radius($radius-size + 2) // two more pixels to hide the top border
-  box-shadow(0 $shadow-size, $shadow-blur, $shadow-color)
+  box-shadow(0 $shadow-size)
 
   header {
     background-color: $dark-gray

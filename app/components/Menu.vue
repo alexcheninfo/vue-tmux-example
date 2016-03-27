@@ -1,12 +1,41 @@
 <template>
-   <!-- tabindex needed to make the focusout work -->
+  <!-- tabindex needed to make the focusout work -->
   <ul tabindex="-1">
-    <li><a href="#">Split up</a></li>
-    <li><a href="#">Split down</a></li>
-    <li><a href="#">Split left</a></li>
-    <li><a href="#">Split right</a></li>
+    <li><a @click="split('up')">Split up</a></li>
+    <li><a @click="split('down')">Split down</a></li>
+    <li><a @click="split('left')">Split left</a></li>
+    <li><a @click="split('right')">Split right</a></li>
   </ul>
 </template>
+
+<script>
+import store from '../store'
+
+export default {
+  props: {
+    app: Object
+  },
+
+  data () {
+    return {
+      state: store.state
+    }
+  },
+
+  computed: {
+    selectedApp () {
+      return this.state.selectedApp
+    }
+  },
+
+  methods: {
+    split (direction) {
+      store.actions.openWindow(this.selectedApp)
+      store.actions.closeMenu()
+    }
+  }
+}
+</script>
 
 <style lang="stylus" scoped>
 @import '../variables'
@@ -14,7 +43,6 @@
 
 ul {
   background: $dark-gray
-  display: none
   padding: 0
   outline: none // remove focus glow
   overflow: hidden // to preserve border radius on hover
@@ -23,7 +51,7 @@ ul {
   z-index: 9999
   list-style($style-type)
   border-radius($radius-size)
-  box-shadow(0 $shadow-size, $shadow-blur, $shadow-color)
+  box-shadow(0 $shadow-size)
 
   li {
     a {

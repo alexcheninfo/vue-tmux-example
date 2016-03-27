@@ -2,11 +2,15 @@
   <nav>
     <ul>
       <li v-for="app in apps">
-        <a @click="openWindow(app)" @contextmenu="openMenu">
+        <a @click="openWindow(app)" @contextmenu="openMenu(app, $event)">
           <img :src="app.icon">
         </a>
-        <menu @focusout="closeMenu"></menu>
       </li>
+      <menu
+        v-show="isMenuVisible"
+        class="menu"
+        @focusout="closeMenu">
+      </menu>
     </ul>
   </nav>
 </template>
@@ -40,7 +44,6 @@ export default {
           color: '#6e716d'
         }
       ],
-      menuToggled: false,
       state: store.state
     }
   },
@@ -48,34 +51,35 @@ export default {
   computed: {
     windows () {
       return this.state.windows
+    },
+
+    isMenuVisible () {
+      return this.state.isMenuVisible
     }
   },
 
   methods: {
     openWindow (app) {
-      const window = {
-        title: app.name,
-        color: app.color
-      }
-
-      this.windows.push(window)
+      store.actions.openWindow(app)
     },
 
-    openMenu (ev) {
+    openMenu (app, ev) {
       ev.preventDefault()
-      const $icon = $(ev.currentTarget)
-      const $menu = $icon.next()
-      const mouseX = ev.offsetX
-      const mouseY = ev.offsetY
+      const $menu = $('.menu')
+      const mouseX = ev.clientX
+      const mouseY = ev.clientY
       $menu.css('top', mouseY + 'px')
       $menu.css('left', mouseX + 'px')
-      $menu.show()
-      $menu.focus()
+      store.actions.openMenu()
+      // $nextTick is needed to make focus() work
+      this.$nextTick(() => {
+        $menu.focus()
+      })
+      store.actions.setSelectedApp(app)
     },
 
     closeMenu (ev) {
-      const $menu = $(ev.currentTarget)
-      $menu.hide()
+      store.actions.closeMenu()
     }
   }
 }
@@ -94,7 +98,7 @@ nav {
     left: 0
     height: 100%
     list-style($style-type)
-    box-shadow($shadow-size 0, $shadow-blur, $shadow-color)
+    box-shadow($shadow-size 0)
 
     li {
       display: block
@@ -109,7 +113,7 @@ nav {
       }
 
       img {
-        filter-drop-shadow(0 $shadow-size, $shadow-blur, $shadow-color)
+        filter-drop-shadow(0 $shadow-size)
       }
     }
   }

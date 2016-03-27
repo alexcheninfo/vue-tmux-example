@@ -1,3 +1,5 @@
+@import './variables'
+
 /* Basic */
 
 list-style($list-style) {
@@ -12,16 +14,16 @@ border-radius($radius) {
   border-radius: $radius
 }
 
-box-shadow($position, $size, $color) {
-  -webkit-box-shadow: $position $size $color
-  -moz-box-shadow: $position $size $color
-  box-shadow: $position $size $color
+box-shadow($position) {
+  -webkit-box-shadow: $position $shadow-blur $shadow-color
+  -moz-box-shadow: $position $blur $shadow-blur $shadow-color
+  box-shadow: $position $shadow-blur $shadow-color
 }
 
-filter-drop-shadow($position, $size, $color) {
-  -webkit-filter: drop-shadow($position $size $color)
-  -moz-filter: drop-shadow($position $size $color)
-  filter: drop-shadow($position $size $color)
+filter-drop-shadow($position) {
+  -webkit-filter: drop-shadow($position $shadow-size $shadow-color)
+  -moz-filter: drop-shadow($position $shadow-size $shadow-color)
+  filter: drop-shadow($position $shadow-size $shadow-color)
 }
 
 /* Hovers */
