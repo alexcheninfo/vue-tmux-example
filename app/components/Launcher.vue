@@ -78,6 +78,7 @@ ul {
 
     img {
       filter-drop-shadow(0 $shadow-size, $shadow-blur, $shadow-color)
+      bob-hover($transition-duration, $transition-position, 0)
     }
   }
 }
