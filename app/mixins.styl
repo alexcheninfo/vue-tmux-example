@@ -20,9 +20,7 @@ filter-drop-shadow($position, $size, $color) {
 
 /* Hovers */
 
-bob-hover($duration, $position) {
-  transition: all $duration ease
-
+bob-hover($position) {
   &:hover {
     -webkit-transform: translate($position)
     transform: translate($position)
@@ -31,13 +29,21 @@ bob-hover($duration, $position) {
 
 /* Transitions */
 
-scale-transition() {
-  &.v-transition {
-    transition: all .2s ease
-  }
+transition($duration) {
+  -webkit-transition: all $duration ease-in-out
+  transition: all $duration ease-in-out
+}
 
+v-transition($duration) {
+  &.v-transition {
+    -webkit-transition: all $duration ease
+    transition: all $duration ease
+  }
+}
+
+v-scale-transition($size) {
   &.v-enter, .v-leave {
-    -webkit-transform: scale(0.9)
-    transform: scale(0.9)
+    -webkit-transform: scale($size)
+    transform: scale($size)
   }
 }

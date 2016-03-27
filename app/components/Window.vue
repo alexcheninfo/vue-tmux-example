@@ -57,6 +57,7 @@ article {
     margin: 10px
   }
 
-  scale-transition()
+  v-transition($transition-duration)
+  v-scale-transition($transition-size)
 }
 </style>
