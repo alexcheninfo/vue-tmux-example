@@ -1,11 +1,13 @@
-// import $ from 'jquery'
-
 const store = {}
 
 store.state = {
   windows: [],
-  currentApp: {},
-  isMenuVisible: false
+  selectedApp: {},
+  isMenuVisible: false,
+  menu: {
+    x: 0,
+    y: 0
+  }
 }
 
 store.actions = {
@@ -27,6 +29,15 @@ store.actions = {
 
   setSelectedApp (app) {
     store.state.selectedApp = app
+  },
+
+  setSelectedIcon (app) {
+    store.state.selectedApp = app
+  },
+
+  setMenuCoors (x, y) {
+    store.state.menu.x = x
+    store.state.menu.y = y
   }
 }
 

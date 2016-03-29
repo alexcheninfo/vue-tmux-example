@@ -1,14 +1,20 @@
 <template>
   <nav>
     <ul>
-      <li v-for="app in apps">
-        <a @click="openWindow(app)" @contextmenu="openMenu(app, $event)">
+      <li
+        v-for="app in apps"
+        :class="{'selected': selectedApp === app}">
+        <a
+          @mouseover="setSelectedApp(app)"
+          @mouseout="unsetSelectedApp()"
+          @click="openWindow(app)"
+          @contextmenu.prevent="openMenu(app, $event)">
           <img :src="app.icon">
         </a>
       </li>
       <menu
+        v-el:menu
         v-show="isMenuVisible"
-        class="menu"
         @focusout="closeMenu">
       </menu>
     </ul>
@@ -16,7 +22,6 @@
 </template>
 
 <script>
-import $ from 'jquery'
 import store from '../store'
 import Menu from '../components/Menu'
 
@@ -49,12 +54,12 @@ export default {
   },
 
   computed: {
-    windows () {
-      return this.state.windows
-    },
-
     isMenuVisible () {
       return this.state.isMenuVisible
+    },
+
+    selectedApp () {
+      return this.state.selectedApp
     }
   },
 
@@ -64,22 +69,31 @@ export default {
     },
 
     openMenu (app, ev) {
-      ev.preventDefault()
-      const $menu = $('.menu')
-      const mouseX = ev.clientX
-      const mouseY = ev.clientY
-      $menu.css('top', mouseY + 'px')
-      $menu.css('left', mouseX + 'px')
+      const menu = this.$els.menu
+      const x = ev.clientX
+      const y = ev.clientY
+      store.actions.setMenuCoors(x, y)
       store.actions.openMenu()
       // $nextTick is needed to make focus() work
       this.$nextTick(() => {
-        $menu.focus()
+        menu.focus()
       })
       store.actions.setSelectedApp(app)
     },
 
     closeMenu (ev) {
       store.actions.closeMenu()
+      store.actions.setSelectedApp({})
+    },
+
+    setSelectedApp (app) {
+      store.actions.setSelectedApp(app)
+    },
+
+    unsetSelectedApp () {
+      if (!this.isMenuVisible) {
+        store.actions.setSelectedApp({})
+      }
     }
   }
 }
@@ -106,10 +120,19 @@ nav {
       text-align: center
       position: relative
       transition($transition-duration)
-      bob-hover($transition-position, 0)
+      /*bob-hover($transition-position, 0)*/
+
+      &.selected {
+        -webkit-transform: translate($transition-position)
+        transform: translate($transition-position)
+      }
 
       &:last-child {
         margin: 0
+      }
+
+      a {
+        display: block
       }
 
       img {

@@ -1,6 +1,8 @@
 <template>
   <!-- tabindex needed to make the focusout work -->
-  <ul tabindex="-1">
+  <ul
+    tabindex="-1"
+    :style="{top: menu.y + 'px', left: menu.x + 'px'}">
     <li><a @click="split('up')">Split up</a></li>
     <li><a @click="split('down')">Split down</a></li>
     <li><a @click="split('left')">Split left</a></li>
@@ -12,10 +14,6 @@
 import store from '../store'
 
 export default {
-  props: {
-    app: Object
-  },
-
   data () {
     return {
       state: store.state
@@ -25,6 +23,10 @@ export default {
   computed: {
     selectedApp () {
       return this.state.selectedApp
+    },
+
+    menu () {
+      return this.state.menu
     }
   },
 
@@ -44,7 +46,7 @@ export default {
 ul {
   background: $dark-gray
   padding: 0
-  outline: none // remove focus glow
+  outline: none // to remove focus glow
   overflow: hidden // to preserve border radius on hover
   position: absolute
   white-space: nowrap
@@ -57,7 +59,6 @@ ul {
     a {
       display: block
       padding: 2px 10px
-      /*border-radius($radius-size)*/
 
       &:hover {
         background: $dark-green
