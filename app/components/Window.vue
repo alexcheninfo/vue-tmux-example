@@ -3,8 +3,8 @@
   <article class="modal" transition>
     <header>
       <h4>
-        <i class="fa fa-circle" :style="'color:' + color"></i>
-        {{ title }}
+        <i class="fa fa-circle" :style="'color:' + window.color"></i>
+        {{ window.title }}
       </h4>
     </header>
     <section>
@@ -14,10 +14,17 @@
 </template>
 
 <script>
+import store from '../store'
+
 export default {
   props: {
-    title: String,
-    color: String
+    window: Object
+  },
+
+  data () {
+    return {
+      state: store.state
+    }
   }
 }
 </script>

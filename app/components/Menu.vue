@@ -3,10 +3,9 @@
   <ul
     tabindex="-1"
     :style="{top: menu.y + 'px', left: menu.x + 'px'}">
-    <li><a @click="split('up')">Split up</a></li>
-    <li><a @click="split('down')">Split down</a></li>
-    <li><a @click="split('left')">Split left</a></li>
-    <li><a @click="split('right')">Split right</a></li>
+    <li v-for="menuItem in menuItems">
+      <a @click="menuItem.action">{{ menuItem.name }}</a>
+    </li>
   </ul>
 </template>
 
@@ -16,6 +15,13 @@ import store from '../store'
 export default {
   data () {
     return {
+      // TODO move this to store?
+      menuItems: [
+        { name: 'Split up', action: () => { return this.split('up') } },
+        { name: 'Split down', action: () => { return this.split('down') } },
+        { name: 'Split left', action: () => { return this.split('left') } },
+        { name: 'Split right', action: () => { return this.split('right') } }
+      ],
       state: store.state
     }
   },
@@ -32,7 +38,7 @@ export default {
 
   methods: {
     split (direction) {
-      store.actions.openWindow(this.selectedApp)
+      store.actions.openWindow(this.selectedApp, direction)
       store.actions.closeMenu()
     }
   }

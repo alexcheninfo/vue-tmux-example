@@ -1,8 +1,9 @@
 const store = {}
 
 store.state = {
-  windows: [],
+  apps: [],
   selectedApp: {},
+  windows: [],
   isMenuVisible: false,
   menu: {
     x: 0,
@@ -11,11 +12,33 @@ store.state = {
 }
 
 store.actions = {
-  openWindow (app) {
+  fetchApps () {
+    const apps = [
+      {
+        icon: require('../assets/images/icon-1.png'),
+        name: 'App 1',
+        color: '#687d77'
+      },
+      {
+        icon: require('../assets/images/icon-2.png'),
+        name: 'App 2',
+        color: '#a4b765'
+      },
+      {
+        icon: require('../assets/images/icon-3.png'),
+        name: 'App 3',
+        color: '#6e716d'
+      }
+    ]
+    store.state.apps = apps
+  },
+
+  openWindow (app, direction) {
     const window = {
       title: app.name,
       color: app.color
     }
+    console.log(direction)
     store.state.windows.push(window)
   },
 
