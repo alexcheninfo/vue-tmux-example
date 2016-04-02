@@ -10,36 +10,36 @@
 </template>
 
 <script>
-import store from '../store'
+import { closeMenu, openWindow } from '../vuex/actions'
 
 export default {
+  vuex: {
+    getters: {
+      menu: state => state.menu,
+      selectedApp: state => state.selectedApp,
+      windows: state => state.windows
+    },
+    actions: {
+      closeMenu,
+      openWindow
+    }
+  },
+
   data () {
     return {
-      // TODO move this to store?
       menuItems: [
         { name: 'Split up', action: () => { return this.split('up') } },
         { name: 'Split down', action: () => { return this.split('down') } },
         { name: 'Split left', action: () => { return this.split('left') } },
         { name: 'Split right', action: () => { return this.split('right') } }
-      ],
-      state: store.state
-    }
-  },
-
-  computed: {
-    selectedApp () {
-      return this.state.selectedApp
-    },
-
-    menu () {
-      return this.state.menu
+      ]
     }
   },
 
   methods: {
     split (direction) {
-      store.actions.openWindow(this.selectedApp, direction)
-      store.actions.closeMenu()
+      this.openWindow(this.selectedApp, direction)
+      this.closeMenu()
     }
   }
 }
@@ -64,7 +64,7 @@ ul {
   li {
     a {
       display: block
-      padding: 2px 10px
+      padding: 2px 15px
 
       &:hover {
         background: $dark-green

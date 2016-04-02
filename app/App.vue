@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import store from './store'
+import { fetchApps } from './vuex/actions'
 import Launcher from './components/Launcher'
 import Window from './components/Window'
 
@@ -18,25 +18,22 @@ import Window from './components/Window'
 // const ipc = window.electron.ipcRenderer
 
 export default {
+  vuex: {
+    getters: {
+      windows: state => state.windows
+    },
+    actions: {
+      fetchApps
+    }
+  },
+
   components: {
     Launcher,
     Window
   },
 
-  data () {
-    return {
-      state: store.state
-    }
-  },
-
-  ready () {
-    store.actions.fetchApps()
-  },
-
-  computed: {
-    windows () {
-      return this.state.windows
-    }
+  created () {
+    this.fetchApps()
   }
 }
 </script>

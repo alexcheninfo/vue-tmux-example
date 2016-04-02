@@ -8,7 +8,7 @@
           @mouseover="setSelectedApp(app)"
           @mouseout="unsetSelectedApp()"
           @click="openWindow(app)"
-          @contextmenu.prevent="openMenu(app, $event)">
+          @contextmenu.prevent="openMenuStart(app, $event)">
           <img :src="app.icon">
         </a>
       </li>
@@ -22,65 +22,49 @@
 </template>
 
 <script>
-import store from '../store'
 import Menu from '../components/Menu'
+import {
+  setSelectedApp,
+  unsetSelectedApp,
+  openMenu,
+  closeMenu,
+  setMenuCoors,
+  openWindow
+} from '../vuex/actions'
 
 export default {
+  vuex: {
+    getters: {
+      apps: state => state.apps,
+      isMenuVisible: state => state.isMenuVisible,
+      selectedApp: state => state.selectedApp
+    },
+    actions: {
+      setSelectedApp,
+      unsetSelectedApp,
+      openMenu,
+      closeMenu,
+      setMenuCoors,
+      openWindow
+    }
+  },
+
   components: {
     Menu
   },
 
-  data () {
-    return {
-      state: store.state
-    }
-  },
-
-  computed: {
-    apps () {
-      return this.state.apps
-    },
-
-    isMenuVisible () {
-      return this.state.isMenuVisible
-    },
-
-    selectedApp () {
-      return this.state.selectedApp
-    }
-  },
-
   methods: {
-    openWindow (app) {
-      store.actions.openWindow(app)
-    },
-
-    openMenu (app, ev) {
+    openMenuStart (app, ev) {
       const menu = this.$els.menu
       const x = ev.clientX
       const y = ev.clientY
-      store.actions.setMenuCoors(x, y)
-      store.actions.openMenu()
+      this.setMenuCoors(x, y)
+      this.openMenu()
       // $nextTick is needed to make focus() work
       this.$nextTick(() => {
         menu.focus()
       })
-      store.actions.setSelectedApp(app)
-    },
-
-    closeMenu (ev) {
-      store.actions.closeMenu()
-      store.actions.setSelectedApp({})
-    },
-
-    setSelectedApp (app) {
-      store.actions.setSelectedApp(app)
-    },
-
-    unsetSelectedApp () {
-      if (!this.isMenuVisible) {
-        store.actions.setSelectedApp({})
-      }
+      this.setSelectedApp(app)
     }
   }
 }

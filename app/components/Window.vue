@@ -14,17 +14,9 @@
 </template>
 
 <script>
-import store from '../store'
-
 export default {
   props: {
     window: Object
-  },
-
-  data () {
-    return {
-      state: store.state
-    }
   }
 }
 </script>

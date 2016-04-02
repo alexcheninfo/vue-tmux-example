@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import store from './vuex/store'
 import { toggle, draggable, selectable } from './directives'
 
 // const mainWindow = window.remote.require('./').mainWindow
@@ -9,5 +10,6 @@ Vue.directive('selectable', selectable)
 
 new Vue({
   el: 'body',
+  store,
   components: { App }
 })
