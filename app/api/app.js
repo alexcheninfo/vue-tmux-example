@@ -1,4 +1,4 @@
-const mockApps = [
+export const mockApps = [
   {
     icon: require('../assets/images/icon-1.png'),
     name: 'App 1',
@@ -16,4 +16,9 @@ const mockApps = [
   }
 ]
 
-export default mockApps
+export const menuItems = [
+  { name: 'Split up', action: 'up' },
+  { name: 'Split down', action: 'down' },
+  { name: 'Split left', action: 'left' },
+  { name: 'Split right', action: 'right' }
+]

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { fetchApps } from './vuex/actions'
+import { fetchApps, fetchMenuItems } from './vuex/actions'
 import Launcher from './components/Launcher'
 import Window from './components/Window'
 
@@ -23,7 +23,8 @@ export default {
       windows: state => state.windows
     },
     actions: {
-      fetchApps
+      fetchApps,
+      fetchMenuItems
     }
   },
 
@@ -34,6 +35,7 @@ export default {
 
   created () {
     this.fetchApps()
+    this.fetchMenuItems()
   }
 }
 </script>

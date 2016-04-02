@@ -2,7 +2,7 @@
   <!-- tabindex needed to make the focusout work -->
   <ul
     tabindex="-1"
-    :style="{top: menu.y + 'px', left: menu.x + 'px'}">
+    :style="{top: y + 'px', left: x + 'px'}">
     <li v-for="menuItem in menuItems">
       <a @click="menuItem.action">{{ menuItem.name }}</a>
     </li>
@@ -10,36 +10,19 @@
 </template>
 
 <script>
-import { closeMenu, openWindow } from '../vuex/actions'
-
 export default {
-  vuex: {
-    getters: {
-      menu: state => state.menu,
-      selectedApp: state => state.selectedApp,
-      windows: state => state.windows
+  props: {
+    x: {
+      type: Number,
+      default: 0
     },
-    actions: {
-      closeMenu,
-      openWindow
-    }
-  },
-
-  data () {
-    return {
-      menuItems: [
-        { name: 'Split up', action: () => { return this.split('up') } },
-        { name: 'Split down', action: () => { return this.split('down') } },
-        { name: 'Split left', action: () => { return this.split('left') } },
-        { name: 'Split right', action: () => { return this.split('right') } }
-      ]
-    }
-  },
-
-  methods: {
-    split (direction) {
-      this.openWindow(this.selectedApp, direction)
-      this.closeMenu()
+    y: {
+      type: Number,
+      default: 0
+    },
+    menuItems: {
+      type: Array,
+      required: true
     }
   }
 }

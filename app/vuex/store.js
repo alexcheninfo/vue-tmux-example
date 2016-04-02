@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 const state = {
   apps: [],
+  menuItems: [],
   selectedApp: {},
   isMenuVisible: false,
   menu: {
@@ -17,6 +18,10 @@ const state = {
 const mutations = {
   FETCH_APPS (state, apps) {
     state.apps = apps
+  },
+
+  FETCH_MENU_ITEMS (state, menuItems) {
+    state.menuItems = menuItems
   },
 
   SET_SELECTED_APP (state, app) {

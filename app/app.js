@@ -8,6 +8,8 @@ Vue.directive('toggle', toggle)
 Vue.directive('draggable', draggable)
 Vue.directive('selectable', selectable)
 
+Vue.config.debug = true
+
 new Vue({
   el: 'body',
   store,

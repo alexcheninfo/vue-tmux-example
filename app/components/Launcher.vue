@@ -12,9 +12,17 @@
           <img :src="app.icon">
         </a>
       </li>
+      <!-- <menu
+        v-el:menu
+        v-show="isMenuVisible"
+        @focusout="closeMenu">
+      </menu> -->
       <menu
         v-el:menu
         v-show="isMenuVisible"
+        :x="menu.x"
+        :y="menu.y"
+        :menu-items="menuItemsComp"
         @focusout="closeMenu">
       </menu>
     </ul>
@@ -29,13 +37,16 @@ import {
   openMenu,
   closeMenu,
   setMenuCoors,
-  openWindow
+  openWindow,
+  splitWindow
 } from '../vuex/actions'
 
 export default {
   vuex: {
     getters: {
       apps: state => state.apps,
+      menu: state => state.menu,
+      // menuItems: state => state.menuItems,
       isMenuVisible: state => state.isMenuVisible,
       selectedApp: state => state.selectedApp
     },
@@ -45,12 +56,24 @@ export default {
       openMenu,
       closeMenu,
       setMenuCoors,
-      openWindow
+      openWindow,
+      splitWindow
     }
   },
 
   components: {
     Menu
+  },
+
+  computed: {
+    menuItemsComp () {
+      return [
+        { name: 'Split up', action: () => { return this.splitWindow(this.selectedApp, 'up') } },
+        { name: 'Split down', action: () => { return this.splitWindow(this.selectedApp, 'down') } },
+        { name: 'Split left', action: () => { return this.splitWindow(this.selectedApp, 'left') } },
+        { name: 'Split right', action: () => { return this.splitWindow(this.selectedApp, 'right') } }
+      ]
+    }
   },
 
   methods: {
