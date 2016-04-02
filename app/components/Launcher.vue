@@ -12,18 +12,13 @@
           <img :src="app.icon">
         </a>
       </li>
-      <!-- <menu
-        v-el:menu
-        v-show="isMenuVisible"
-        @focusout="closeMenu">
-      </menu> -->
       <menu
         v-el:menu
         v-show="isMenuVisible"
         :x="menu.x"
         :y="menu.y"
-        :menu-items="menuItemsComp"
         @focusout="closeMenu">
+        <menu-item v-for="menuItem in menuItems" :item="menuItem"></menu-item>
       </menu>
     </ul>
   </nav>
@@ -31,6 +26,7 @@
 
 <script>
 import Menu from '../components/Menu'
+import MenuItem from '../components/MenuItem'
 import {
   setSelectedApp,
   unsetSelectedApp,
@@ -62,11 +58,12 @@ export default {
   },
 
   components: {
-    Menu
+    Menu,
+    MenuItem
   },
 
   computed: {
-    menuItemsComp () {
+    menuItems () {
       return [
         { name: 'Split up', action: () => { return this.splitWindow(this.selectedApp, 'up') } },
         { name: 'Split down', action: () => { return this.splitWindow(this.selectedApp, 'down') } },
@@ -108,7 +105,7 @@ nav {
     list-style($style-type)
     box-shadow($shadow-size 0)
 
-    li {
+    > li {
       display: block
       margin: 0 0 8px
       text-align: center

@@ -1,11 +1,9 @@
 <template>
-  <!-- tabindex needed to make the focusout work -->
+  <!-- tabindex needed to make focusout work -->
   <ul
     tabindex="-1"
-    :style="{top: y + 'px', left: x + 'px'}">
-    <li v-for="menuItem in menuItems">
-      <a @click="menuItem.action">{{ menuItem.name }}</a>
-    </li>
+    :style="{ top: y + 'px', left: x + 'px' }">
+    <slot></slot>
   </ul>
 </template>
 
@@ -19,10 +17,6 @@ export default {
     y: {
       type: Number,
       default: 0
-    },
-    menuItems: {
-      type: Array,
-      required: true
     }
   }
 }
@@ -43,16 +37,5 @@ ul {
   list-style($style-type)
   border-radius($radius-size)
   box-shadow(0 $shadow-size)
-
-  li {
-    a {
-      display: block
-      padding: 2px 15px
-
-      &:hover {
-        background: $dark-green
-      }
-    }
-  }
 }
 </style>
