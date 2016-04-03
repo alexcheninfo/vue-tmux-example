@@ -2,7 +2,7 @@
   <!-- tabindex needed to make focusout work -->
   <ul
     tabindex="-1"
-    :style="{ top: y + 'px', left: x + 'px' }">
+    :style="{ top: position.y + 'px', left: position.x + 'px' }">
     <slot></slot>
   </ul>
 </template>
@@ -10,13 +10,15 @@
 <script>
 export default {
   props: {
-    x: {
-      type: Number,
-      default: 0
-    },
-    y: {
-      type: Number,
-      default: 0
+    position: {
+      x: {
+        type: Number,
+        default: 0
+      },
+      y: {
+        type: Number,
+        default: 0
+      }
     }
   }
 }

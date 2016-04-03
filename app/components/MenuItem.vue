@@ -1,13 +1,13 @@
 <template>
   <li>
-    <a @click="item.action">{{ item.name }}</a>
+    <a @click="menuItem.action">{{ menuItem.name }}</a>
   </li>
 </template>
 
 <script>
 export default {
   props: {
-    item: {
+    menuItem: {
       type: Object,
       required: true
     }

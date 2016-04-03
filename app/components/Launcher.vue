@@ -1,30 +1,28 @@
 <template>
   <nav>
     <ul>
-      <li
+      <icon
         v-for="app in apps"
-        :class="{'selected': selectedApp === app}">
-        <a
-          @mouseover="setSelectedApp(app)"
-          @mouseout="unsetSelectedApp()"
-          @click="openWindow(app)"
-          @contextmenu.prevent="openMenuStart(app, $event)">
-          <img :src="app.icon">
-        </a>
-      </li>
+        :class="{'selected': selectedApp === app }"
+        :app="app"
+        @mouseover="setSelectedApp(app)"
+        @mouseout="unsetSelectedApp()"
+        @click="openWindow(app)"
+        @contextmenu.prevent="openMenuStart(app, $event)">
+      </icon>
       <menu
         v-el:menu
         v-show="isMenuVisible"
-        :x="menu.x"
-        :y="menu.y"
+        :position="menuPosition"
         @focusout="closeMenu">
-        <menu-item v-for="menuItem in menuItems" :item="menuItem"></menu-item>
+        <menu-item v-for="menuItem in menuItems" :menu-item="menuItem"></menu-item>
       </menu>
     </ul>
   </nav>
 </template>
 
 <script>
+import Icon from '../components/Icon'
 import Menu from '../components/Menu'
 import MenuItem from '../components/MenuItem'
 import {
@@ -41,7 +39,12 @@ export default {
   vuex: {
     getters: {
       apps: state => state.apps,
-      menu: state => state.menu,
+      menuPosition: state => {
+        return {
+          x: state.menu.x,
+          y: state.menu.y
+        }
+      },
       // menuItems: state => state.menuItems,
       isMenuVisible: state => state.isMenuVisible,
       selectedApp: state => state.selectedApp
@@ -58,6 +61,7 @@ export default {
   },
 
   components: {
+    Icon,
     Menu,
     MenuItem
   },
@@ -95,41 +99,17 @@ export default {
 @import '../mixins'
 
 nav {
-  > ul {
-    background: $dark-gray
-    padding: $padding-size
-    position: absolute
-    top: 0
-    left: 0
-    height: 100%
+  background: $dark-gray
+  padding: $padding-size
+  position: absolute
+  top: 0
+  left: 0
+  height: 100%
+  box-shadow($shadow-size 0)
+
+  ul {
+    padding: 0
     list-style($style-type)
-    box-shadow($shadow-size 0)
-
-    > li {
-      display: block
-      margin: 0 0 8px
-      text-align: center
-      position: relative
-      transition($transition-duration)
-      /*bob-hover($transition-position, 0)*/
-
-      &.selected {
-        -webkit-transform: translate($transition-position)
-        transform: translate($transition-position)
-      }
-
-      &:last-child {
-        margin: 0
-      }
-
-      a {
-        display: block
-      }
-
-      img {
-        filter-drop-shadow(0 $shadow-size)
-      }
-    }
   }
 }
 </style>
