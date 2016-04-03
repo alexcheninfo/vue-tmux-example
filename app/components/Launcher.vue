@@ -9,10 +9,11 @@
       </icon>
       <menu
         v-el:menu
-        v-show="isMenuVisible"
+        :show="isMenuVisible"
         :position="menuPosition"
-        @focusout="closeMenu">
-        <menu-item v-for="menuItem in menuItems" :menu-item="menuItem"></menu-item>
+        :actions="{ focusout: closeMenu }">
+        <menu-item v-for="menuItem in menuItems" :menu-item="menuItem">
+        </menu-item>
       </menu>
     </ul>
   </nav>

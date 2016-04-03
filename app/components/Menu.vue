@@ -1,8 +1,10 @@
 <template>
   <!-- tabindex needed to make focusout work -->
   <ul
+    v-show="show"
     tabindex="-1"
-    :style="{ top: position.y + 'px', left: position.x + 'px' }">
+    :style="{ top: position.y + 'px', left: position.x + 'px' }"
+    @focusout="actions && actions.focusout ? actions.focusout(item) : null">
     <slot></slot>
   </ul>
 </template>
@@ -10,6 +12,10 @@
 <script>
 export default {
   props: {
+    show: {
+      type: Boolean,
+      default: false
+    },
     position: {
       x: {
         type: Number,
@@ -19,6 +25,10 @@ export default {
         type: Number,
         default: 0
       }
+    },
+    actions: {
+      focusout: Function,
+      required: false
     }
   }
 }
