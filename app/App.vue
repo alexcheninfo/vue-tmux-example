@@ -9,7 +9,7 @@
 
 <script>
 import { fetchApps, fetchMenuItems } from './vuex/actions'
-import Launcher from './components/Launcher'
+import Launcher from './sections/Launcher'
 import Window from './components/Window'
 
 // Define Electron objects like this:

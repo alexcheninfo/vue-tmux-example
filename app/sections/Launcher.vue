@@ -71,17 +71,24 @@ export default {
         mouseover: this.setSelectedApp,
         mouseout: this.unsetSelectedApp,
         contextmenu: this.openMenuStart
-      }
-    }
-  },
-
-  computed: {
-    menuItems () {
-      return [
-        { name: 'Split up', action: () => { return this.splitWindow(this.selectedApp, 'up') } },
-        { name: 'Split down', action: () => { return this.splitWindow(this.selectedApp, 'down') } },
-        { name: 'Split left', action: () => { return this.splitWindow(this.selectedApp, 'left') } },
-        { name: 'Split right', action: () => { return this.splitWindow(this.selectedApp, 'right') } }
+      },
+      menuItems: [
+        {
+          name: 'Split up',
+          action: () => { return this.splitWindow(this.selectedApp, 'up') }
+        },
+        {
+          name: 'Split down',
+          action: () => { return this.splitWindow(this.selectedApp, 'down') }
+        },
+        {
+          name: 'Split left',
+          action: () => { return this.splitWindow(this.selectedApp, 'left') }
+        },
+        {
+          name: 'Split right',
+          action: () => { return this.splitWindow(this.selectedApp, 'right') }
+        }
       ]
     }
   },
