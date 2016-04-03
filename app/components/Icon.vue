@@ -1,15 +1,45 @@
 <template>
-  <li>
-    <a><img :src="app.icon"></a>
+  <li :class="{ 'selected': selected === item }">
+    <a
+      @click="actions && actions.click ? actions.click(item) : null"
+      @mouseover="actions && actions.mouseover ? actions.mouseover(item) : null"
+      @mouseout="actions && actions.mouseout ? actions.mouseout() : null"
+      @contextmenu.prevent="actions && actions.contextmenu
+        ? actions.contextmenu(item, $event)
+        : null">
+      <img :src="item.icon">
+    </a>
   </li>
 </template>
 
 <script>
 export default {
   props: {
-    app: {
+    item: {
       type: Object,
       required: true
+    },
+    selected: {
+      type: Object,
+      required: false
+    },
+    actions: {
+      click: {
+        type: Function,
+        required: false
+      },
+      mouseover: {
+        type: Function,
+        required: false
+      },
+      mouseout: {
+        type: Function,
+        required: false
+      },
+      contextmenu: {
+        type: Function,
+        required: false
+      }
     }
   }
 }

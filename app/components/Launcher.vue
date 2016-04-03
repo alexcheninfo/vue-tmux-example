@@ -3,12 +3,9 @@
     <ul>
       <icon
         v-for="app in apps"
-        :class="{'selected': selectedApp === app }"
-        :app="app"
-        @mouseover="setSelectedApp(app)"
-        @mouseout="unsetSelectedApp()"
-        @click="openWindow(app)"
-        @contextmenu.prevent="openMenuStart(app, $event)">
+        :item="app"
+        :selected="selectedApp"
+        :actions="appActions">
       </icon>
       <menu
         v-el:menu
@@ -64,6 +61,17 @@ export default {
     Icon,
     Menu,
     MenuItem
+  },
+
+  data () {
+    return {
+      appActions: {
+        click: this.openWindow,
+        mouseover: this.setSelectedApp,
+        mouseout: this.unsetSelectedApp,
+        contextmenu: this.openMenuStart
+      }
+    }
   },
 
   computed: {
