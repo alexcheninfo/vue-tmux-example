@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section :style="{ backgroundImage: 'url(' + wallpaper[0].file + ')' }">
     <window
       v-for="window in windows"
       :item="window"
@@ -18,7 +18,8 @@ export default {
   vuex: {
     getters: {
       windows: state => state.windows,
-      activeWindow: state => state.activeWindow
+      activeWindow: state => state.activeWindow,
+      wallpaper: state => state.wallpaper
     },
     actions: {
       setActiveWindow
@@ -33,7 +34,9 @@ export default {
 
 <style lang="stylus" scoped>
 section {
-  background: url('../assets/images/wallpaper.jpg') no-repeat center center fixed
+  background-repeat: no-repeat
+  background-position: center
+  background-attachment: fixed
   -webkit-background-size: cover
   -moz-background-size: cover
   -o-background-size: cover

@@ -16,6 +16,13 @@ export const mockApps = [
   }
 ]
 
+export const mockWallpaper = [
+  {
+    name: 'Forest Patrol',
+    file: require('../assets/images/wallpaper.jpg')
+  }
+]
+
 export const menuItems = [
   { name: 'Split up', action: 'up' },
   { name: 'Split down', action: 'down' },

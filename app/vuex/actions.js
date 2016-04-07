@@ -1,4 +1,8 @@
-import { mockApps, menuItems } from '../api/app'
+import {
+  mockApps,
+  menuItems,
+  mockWallpaper
+} from '../api/app'
 
 export const fetchApps = ({ dispatch }) => {
   dispatch('FETCH_APPS', mockApps)
@@ -6,6 +10,10 @@ export const fetchApps = ({ dispatch }) => {
 
 export const fetchMenuItems = ({ dispatch }) => {
   dispatch('FETCH_MENU_ITEMS', menuItems)
+}
+
+export const fetchWallpaper = ({ dispatch }) => {
+  dispatch('FETCH_WALLPAPER', mockWallpaper)
 }
 
 export const setSelectedApp = ({ dispatch }, app) => {

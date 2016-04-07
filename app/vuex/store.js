@@ -6,6 +6,7 @@ Vue.use(Vuex)
 const state = {
   apps: [],
   menuItems: [],
+  wallpaper: {},
   selectedApp: {},
   activeWindow: {},
   isMenuVisible: false,
@@ -23,6 +24,10 @@ const mutations = {
 
   FETCH_MENU_ITEMS (state, menuItems) {
     state.menuItems = menuItems
+  },
+
+  FETCH_WALLPAPER (state, wallpaper) {
+    state.wallpaper = wallpaper
   },
 
   SET_SELECTED_APP (state, app) {

@@ -6,9 +6,13 @@
 </template>
 
 <script>
-import { fetchApps, fetchMenuItems } from './vuex/actions'
 import Launcher from './sections/Launcher'
 import Desktop from './sections/Desktop'
+import {
+  fetchApps,
+  fetchMenuItems,
+  fetchWallpaper
+} from './vuex/actions'
 
 // Define Electron objects like this:
 // const BrowserWindow = remote.BrowserWindow
@@ -19,7 +23,8 @@ export default {
   vuex: {
     actions: {
       fetchApps,
-      fetchMenuItems
+      fetchMenuItems,
+      fetchWallpaper
     }
   },
 
@@ -31,6 +36,7 @@ export default {
   created () {
     this.fetchApps()
     this.fetchMenuItems()
+    this.fetchWallpaper()
   }
 }
 </script>
