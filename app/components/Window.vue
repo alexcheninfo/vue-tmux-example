@@ -52,7 +52,7 @@ article {
   box-shadow(0 $shadow-size)
 
   header {
-    background-color: $dark-gray
+    background-color: $purple
     flex: 0 0
     padding: 5px 0
     border-radius($radius-size $radius-size 0 0)

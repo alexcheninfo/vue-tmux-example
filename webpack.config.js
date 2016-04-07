@@ -32,7 +32,7 @@ module.exports = {
         loader: 'babel'
       },
       {
-        test: /\.png$/,
+        test: /\.(png|jpg)$/,
         loader: 'url?limit=8192'
       },
       {

@@ -118,7 +118,8 @@ export default {
 @import '../mixins'
 
 nav {
-  background: $dark-gray
+  background: $alpha-purple
+  border-right: 1px solid $alpha-white
   padding: $padding-size
   position: absolute
   top: 0

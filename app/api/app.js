@@ -2,17 +2,17 @@ export const mockApps = [
   {
     icon: require('../assets/images/icon-1.png'),
     name: 'App 1',
-    color: '#687d77'
+    color: '#eb885d'
   },
   {
     icon: require('../assets/images/icon-2.png'),
     name: 'App 2',
-    color: '#a4b765'
+    color: '#b9394b'
   },
   {
     icon: require('../assets/images/icon-3.png'),
     name: 'App 3',
-    color: '#6e716d'
+    color: '#720e34'
   }
 ]
 

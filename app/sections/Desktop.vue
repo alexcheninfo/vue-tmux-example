@@ -33,9 +33,14 @@ export default {
 
 <style lang="stylus" scoped>
 section {
+  background: url('../assets/images/wallpaper.jpg') no-repeat center center fixed
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  background-size: cover
   display: flex
   flex-direction: column
-  margin-bottom: 15px
+  padding-bottom: 15px
   position: absolute
   top: 0
   left: 0
