@@ -2,10 +2,11 @@
 
 /* Basic */
 
-list-style($list-style) {
-  list-style-type: $list-style
-  margin: 0
-  text-align: left
+background-size($size) {
+  -webkit-background-size: $size
+  -moz-background-size: $size
+  -o-background-size: $size
+  background-size: $size
 }
 
 border-radius($radius) {
@@ -18,6 +19,12 @@ box-shadow($position) {
   -webkit-box-shadow: $position $shadow-blur $shadow-color
   -moz-box-shadow: $position $blur $shadow-blur $shadow-color
   box-shadow: $position $shadow-blur $shadow-color
+}
+
+list-style($list-style) {
+  list-style-type: $list-style
+  margin: 0
+  text-align: left
 }
 
 filter-drop-shadow($position) {

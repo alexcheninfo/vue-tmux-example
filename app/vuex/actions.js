@@ -47,7 +47,6 @@ export const openWindow = ({ dispatch, state }, app, direction) => {
   dispatch('OPEN_WINDOW', app, direction)
   const newestWindow = state.windows[state.windows.length - 1]
   dispatch('SET_ACTIVE_WINDOW', newestWindow)
-  console.log(state.windows)
 }
 
 export const splitWindow = ({ dispatch }, app, direction) => {

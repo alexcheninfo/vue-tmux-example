@@ -60,11 +60,13 @@ article {
     h4 {
       color: $white
       margin: 0
+      opacity: 0.5
       text-align: center
 
       i {
         margin: 0 5px 0 0
       }
+
     }
   }
 
@@ -85,6 +87,12 @@ article {
         background-color: #bbb
         border-radius: 50px
       }
+    }
+  }
+
+  &.active {
+    h4 {
+      opacity: 1
     }
   }
 

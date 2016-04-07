@@ -33,14 +33,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '../mixins' 
+
 section {
   background-repeat: no-repeat
   background-position: center
   background-attachment: fixed
-  -webkit-background-size: cover
-  -moz-background-size: cover
-  -o-background-size: cover
-  background-size: cover
   display: flex
   flex-direction: column
   padding-bottom: 15px
@@ -49,5 +47,6 @@ section {
   left: 0
   right: 0
   bottom: 0
+  background-size(cover)
 }
 </style>
