@@ -7,6 +7,7 @@ const state = {
   apps: [],
   menuItems: [],
   selectedApp: {},
+  activeWindow: {},
   isMenuVisible: false,
   menu: {
     x: 0,
@@ -28,6 +29,10 @@ const mutations = {
     state.selectedApp = app
   },
 
+  SET_ACTIVE_WINDOW (state, win) {
+    state.activeWindow = win
+  },
+
   OPEN_MENU (state) {
     state.isMenuVisible = true
   },
@@ -46,7 +51,6 @@ const mutations = {
       title: app.name,
       color: app.color
     }
-    console.log(direction)
     state.windows.push(window)
   }
 }

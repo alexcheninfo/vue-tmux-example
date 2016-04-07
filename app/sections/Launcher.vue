@@ -25,6 +25,7 @@ import Menu from '../components/Menu'
 import MenuItem from '../components/MenuItem'
 import {
   setSelectedApp,
+  setActiveWindow,
   unsetSelectedApp,
   openMenu,
   closeMenu,
@@ -45,10 +46,12 @@ export default {
       },
       // menuItems: state => state.menuItems,
       isMenuVisible: state => state.isMenuVisible,
-      selectedApp: state => state.selectedApp
+      selectedApp: state => state.selectedApp,
+      activeWindow: state => state.activeWindow
     },
     actions: {
       setSelectedApp,
+      setActiveWindow,
       unsetSelectedApp,
       openMenu,
       closeMenu,
@@ -121,7 +124,8 @@ nav {
   top: 0
   left: 0
   height: 100%
-  box-shadow($shadow-size 0)
+  z-index: 9999
+  /*box-shadow($shadow-size 0)*/
 
   ul {
     padding: 0

@@ -4,7 +4,7 @@
     v-show="show"
     tabindex="-1"
     :style="{ top: position.y + 'px', left: position.x + 'px' }"
-    @focusout="actions && actions.focusout ? actions.focusout(item) : null">
+    @focusout="actions && actions.focusout ? actions.focusout() : null">
     <slot></slot>
   </ul>
 </template>

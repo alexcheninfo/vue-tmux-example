@@ -1,10 +1,12 @@
 <template>
   <!-- <article v-draggable> -->
-  <article class="modal" transition>
+  <article
+    @click="actions && actions.click ? actions.click(item) : null"
+    transition>
     <header>
       <h4>
-        <i class="fa fa-circle" :style="'color:' + window.color"></i>
-        {{ window.title }}
+        <i class="fa fa-circle" :style="'color:' + item.color"></i>
+        {{ item.title }}
       </h4>
     </header>
     <section>
@@ -16,7 +18,16 @@
 <script>
 export default {
   props: {
-    window: Object
+    item: {
+      type: Object,
+      required: true
+    },
+    actions: {
+      click: {
+        type: Function,
+        required: false
+      }
+    }
   }
 }
 </script>
@@ -27,20 +38,22 @@ export default {
 
 article {
   background-color: $white
-  /*position: absolute
-  top: 15px
-  left: 82px
-  right: 12px*/
+  display: flex
+  flex-direction: column
+  flex: 1 1
   margin-top: 15px
   margin-right: 15px
-  margin-bottom: 15px
+  /*margin-bottom: 15px*/
   margin-left: 68px + 15px // Launcher's width plus margin
-  height: 400px
+  /*position: absolute*/
+  /*top: 0
+  bottom: 0*/
   border-radius($radius-size + 2) // two more pixels to hide the top border
   box-shadow(0 $shadow-size)
 
   header {
     background-color: $dark-gray
+    flex: 0 0
     padding: 5px 0
     border-radius($radius-size $radius-size 0 0)
 
@@ -56,7 +69,23 @@ article {
   }
 
   section {
-    margin: 10px
+    flex: 1 1
+    padding: 10px
+    overflow-y: scroll
+
+    &::-webkit-scrollbar {
+      width: 10px
+      background: #ddd
+
+      &-track {
+        background-color: #ddd
+      }
+
+      &-thumb {
+        background-color: #bbb
+        border-radius: 50px
+      }
+    }
   }
 
   v-transition($transition-duration)
