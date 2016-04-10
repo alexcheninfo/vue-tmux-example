@@ -6,7 +6,7 @@
     <header>
       <h4>
         <i class="fa fa-circle" :style="'color:' + item.color"></i>
-        {{ item.title }}
+        {{ item.name }}
       </h4>
     </header>
     <section>

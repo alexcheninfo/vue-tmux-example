@@ -3,7 +3,7 @@
     <ul>
       <icon
         v-for="app in apps"
-        @event-name="openWindow"
+        @event-name="openApp"
         :item="app"
         :selected="selectedApp"
         :actions="appActions">
@@ -18,6 +18,7 @@
       </menu>
     </ul>
   </nav>
+  <pre>{{ openApps | json }}</pre>
 </template>
 
 <script>
@@ -26,19 +27,21 @@ import Menu from '../components/Menu'
 import MenuItem from '../components/MenuItem'
 import {
   setSelectedApp,
-  setActiveWindow,
   unsetSelectedApp,
   openMenu,
+  openApp,
   closeMenu,
   setMenuCoors,
-  openWindow,
-  splitWindow
+  splitApp
 } from '../vuex/actions'
 
 export default {
   vuex: {
     getters: {
       apps: state => state.apps,
+      openApps: state => {
+        return state.apps.find(app => app.state === 'open')
+      },
       activeApps: state => state.activeApps,
       menuPosition: state => {
         return {
@@ -48,18 +51,16 @@ export default {
       },
       // menuItems: state => state.menuItems,
       isMenuVisible: state => state.isMenuVisible,
-      selectedApp: state => state.selectedApp,
-      activeWindow: state => state.activeWindow
+      selectedApp: state => state.selectedApp
     },
     actions: {
       setSelectedApp,
-      setActiveWindow,
       unsetSelectedApp,
       openMenu,
+      openApp,
       closeMenu,
       setMenuCoors,
-      openWindow,
-      splitWindow
+      splitApp
     }
   },
 
@@ -72,7 +73,6 @@ export default {
   data () {
     return {
       appActions: {
-        click: this.openWindow,
         mouseover: this.setSelectedApp,
         mouseout: this.unsetSelectedApp,
         contextmenu: this.openMenuStart
@@ -80,35 +80,25 @@ export default {
       menuItems: [
         {
           name: 'Split up',
-          action: () => { return this.splitWindow(this.selectedApp, 'up') }
+          action: () => { return this.splitApp(this.selectedApp, 'up') }
         },
         {
           name: 'Split down',
-          action: () => { return this.splitWindow(this.selectedApp, 'down') }
+          action: () => { return this.splitApp(this.selectedApp, 'down') }
         },
         {
           name: 'Split left',
-          action: () => { return this.splitWindow(this.selectedApp, 'left') }
+          action: () => { return this.splitApp(this.selectedApp, 'left') }
         },
         {
           name: 'Split right',
-          action: () => { return this.splitWindow(this.selectedApp, 'right') }
+          action: () => { return this.splitApp(this.selectedApp, 'right') }
         }
       ]
     }
   },
 
-  events: {
-    'open-window': function () {
-      console.log('openWindow')
-    }
-  },
-
   methods: {
-    parentMethod () {
-      console.log('WORKED')
-    },
-
     openMenuStart (app, ev) {
       const menu = this.$els.menu
       const x = ev.clientX

@@ -5,17 +5,17 @@ Vue.use(Vuex)
 
 const state = {
   apps: [],
+  openApps: [],
+  activeApp: [],
   menuItems: [],
   wallpaper: {},
   selectedApp: {},
   activeApps: [],
-  activeWindow: {},
   isMenuVisible: false,
   menu: {
     x: 0,
     y: 0
-  },
-  windows: []
+  }
 }
 
 const mutations = {
@@ -35,12 +35,8 @@ const mutations = {
     state.selectedApp = app
   },
 
-  SET_ACTIVE_WINDOW (state, win) {
-    state.activeWindow = win
-  },
-
-  SET_FOCUSED_APP (state, app) {
-    state.focusedApp = app
+  SET_ACTIVE_APP (state, app) {
+    state.activeApp = app
   },
 
   OPEN_MENU (state) {
@@ -56,17 +52,8 @@ const mutations = {
     state.menu.y = y
   },
 
-  OPEN_WINDOW (state, app, direction) {
-    const window = {
-      title: app.name,
-      color: app.color,
-      path: app.path
-    }
-    state.windows.push(window)
-  },
-
   OPEN_APP (state, app) {
-    state.activeApps.push(app)
+    state.openApps.push(app)
   }
 }
 

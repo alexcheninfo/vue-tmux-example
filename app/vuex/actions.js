@@ -24,10 +24,6 @@ export const setFocusedApp = ({ dispatch }, app) => {
   dispatch('SET_FOCUSED_APP', app)
 }
 
-export const setActiveWindow = ({ dispatch }, win) => {
-  dispatch('SET_ACTIVE_WINDOW', win)
-}
-
 export const unsetSelectedApp = ({ dispatch, state }) => {
   if (!state.isMenuVisible) {
     dispatch('SET_SELECTED_APP', {})
@@ -47,19 +43,13 @@ export const setMenuCoors = ({ dispatch }, x, y) => {
   dispatch('SET_MENU_COORS', x, y)
 }
 
-export const openWindow = ({ dispatch, state }, app, direction) => {
-  dispatch('OPEN_APP', app)
-  dispatch('OPEN_WINDOW', app, direction)
-  const newestWindow = state.windows[state.windows.length - 1]
-  dispatch('SET_ACTIVE_WINDOW', newestWindow)
-}
-
-export const splitWindow = ({ dispatch }, app, direction) => {
-  dispatch('OPEN_APP', app)
-  dispatch('OPEN_WINDOW', app, direction)
+export const splitApp = ({ dispatch }, app, direction) => {
+  dispatch('OPEN_APP', app, direction)
   dispatch('CLOSE_MENU')
 }
 
-export const openApp = ({ dispatch }, app) => {
-  dispatch('OPEN_APP', app)
+export const openApp = ({ dispatch, state }, app, direction) => {
+  dispatch('OPEN_APP', app, direction)
+  const newestApp = state.openApps[state.openApps.length - 1]
+  dispatch('SET_ACTIVE_APP', newestApp)
 }

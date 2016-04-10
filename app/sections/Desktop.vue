@@ -1,14 +1,14 @@
 <template>
   <section :style="{ backgroundImage: 'url(' + wallpaper[0].file + ')' }">
     <window
-      v-for="window in windows"
-      :item="window"
-      :class="{ 'active': activeWindow === window }"
-      :actions="{ click: setActiveWindow }">
+      v-for="openApp in openApps"
+      track-by="$index"
+      :item="openApp"
+      :class="{ 'active': activeApp === openApp }"
+      :actions="{ click: setActiveApp }">
       <component
-        :is="window.path">
+        :is="openApp.path">
       </component>
-      <pre>{{ selectedAppIndex }}</pre>
     </window>
   </section>
 </template>
@@ -18,25 +18,22 @@ import Window from '../components/Window'
 import Commander from '../apps/Commander'
 import Writer from '../apps/Writer'
 import {
-  setActiveWindow,
   setSelectedApp,
-  splitWindow
+  openApp
 } from '../vuex/actions'
 
 export default {
   vuex: {
     getters: {
-      windows: state => state.windows,
-      activeWindow: state => state.activeWindow,
       wallpaper: state => state.wallpaper,
       apps: state => state.apps,
+      openApps: state => state.openApps,
       selectedApp: state => state.selectedApp,
-      activeApps: state => state.activeApps
+      activeApp: state => state.activeApp
     },
     actions: {
-      setActiveWindow,
       setSelectedApp,
-      splitWindow
+      openApp
     }
   },
 
@@ -49,7 +46,7 @@ export default {
   created () {
     const selectedApp = this.apps[0]
     this.setSelectedApp(selectedApp)
-    this.splitWindow(this.selectedApp, 'up')
+    this.openApp(this.selectedApp)
   }
 }
 </script>
