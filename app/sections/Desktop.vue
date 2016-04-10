@@ -6,9 +6,7 @@
       :item="openApp"
       :class="{ 'active': activeApp === openApp }"
       @on-click="setActiveApp">
-      <component
-        :is="openApp.path">
-      </component>
+      <component :is="openApp.path"></component>
     </window>
   </section>
 </template>
@@ -18,19 +16,22 @@ import Window from '../components/Window'
 import Commander from '../apps/Commander'
 import Writer from '../apps/Writer'
 import {
-  setSelectedApp,
-  openApp,
-  setActiveApp
-} from '../vuex/actions'
+  wallpaper,
+  apps,
+  openApps,
+  selectedApp,
+  activeApp
+} from '../vuex/getters'
+import { setSelectedApp, openApp, setActiveApp } from '../vuex/actions'
 
 export default {
   vuex: {
     getters: {
-      wallpaper: state => state.wallpaper,
-      apps: state => state.apps,
-      openApps: state => state.openApps,
-      selectedApp: state => state.selectedApp,
-      activeApp: state => state.activeApp
+      wallpaper: wallpaper,
+      apps: apps,
+      openApps: openApps,
+      selectedApp: selectedApp,
+      activeApp: activeApp
     },
     actions: {
       setSelectedApp,

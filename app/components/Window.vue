@@ -1,6 +1,6 @@
 <template>
   <!-- <article v-draggable> -->
-  <article @click="onclick(item)" transition>
+  <article @click="onClick(item)" transition>
     <header>
       <h4>
         <i class="fa fa-circle" :style="'color:' + item.color"></i>

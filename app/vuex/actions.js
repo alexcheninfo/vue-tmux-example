@@ -43,11 +43,6 @@ export const setMenuCoors = ({ dispatch }, x, y) => {
   dispatch('SET_MENU_COORS', x, y)
 }
 
-export const splitApp = ({ dispatch }, app, direction) => {
-  dispatch('OPEN_APP', app, direction)
-  dispatch('CLOSE_MENU')
-}
-
 export const openApp = ({ dispatch, state }, app, direction) => {
   dispatch('OPEN_APP', app, direction)
   const newestApp = state.openApps[state.openApps.length - 1]

@@ -28,32 +28,27 @@ import Icon from '../components/Icon'
 import Menu from '../components/Menu'
 import MenuItem from '../components/MenuItem'
 import {
+  apps,
+  menuPosition,
+  isMenuVisible,
+  selectedApp
+} from '../vuex/getters'
+import {
   setSelectedApp,
   unsetSelectedApp,
   openMenu,
   openApp,
   closeMenu,
-  setMenuCoors,
-  splitApp
+  setMenuCoors
 } from '../vuex/actions'
 
 export default {
   vuex: {
     getters: {
-      apps: state => state.apps,
-      // openApps: state => {
-      //   return state.apps.find(app => app.state === 'open')
-      // },
-      activeApps: state => state.activeApps,
-      menuPosition: state => {
-        return {
-          x: state.menu.x,
-          y: state.menu.y
-        }
-      },
-      // menuItems: state => state.menuItems,
-      isMenuVisible: state => state.isMenuVisible,
-      selectedApp: state => state.selectedApp
+      apps: apps,
+      menuPosition: menuPosition,
+      isMenuVisible: isMenuVisible,
+      selectedApp: selectedApp
     },
     actions: {
       setSelectedApp,
@@ -61,8 +56,7 @@ export default {
       openMenu,
       openApp,
       closeMenu,
-      setMenuCoors,
-      splitApp
+      setMenuCoors
     }
   },
 
@@ -77,25 +71,26 @@ export default {
       menuItems: [
         {
           name: 'Split up',
-          action: () => { return this.splitApp(this.selectedApp, 'up') }
+          action: () => { return this.openApp(this.selectedApp, 'up') }
         },
         {
           name: 'Split down',
-          action: () => { return this.splitApp(this.selectedApp, 'down') }
+          action: () => { return this.openApp(this.selectedApp, 'down') }
         },
         {
           name: 'Split left',
-          action: () => { return this.splitApp(this.selectedApp, 'left') }
+          action: () => { return this.openApp(this.selectedApp, 'left') }
         },
         {
           name: 'Split right',
-          action: () => { return this.splitApp(this.selectedApp, 'right') }
+          action: () => { return this.openApp(this.selectedApp, 'right') }
         }
       ]
     }
   },
 
   methods: {
+    // TODO turn this into smaller functions or Vuex action
     openMenuStart (app, ev) {
       const menu = this.$els.menu
       const x = ev.clientX
