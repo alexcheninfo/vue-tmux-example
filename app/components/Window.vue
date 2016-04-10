@@ -44,7 +44,7 @@ article {
   margin-top: 15px
   margin-right: 15px
   /*margin-bottom: 15px*/
-  margin-left: 68px + 15px // Launcher's width plus margin
+  margin-left: 15px // Launcher's width plus margin
   /*position: absolute*/
   /*top: 0
   bottom: 0*/
@@ -52,13 +52,13 @@ article {
   box-shadow(0 $shadow-size)
 
   header {
-    background-color: $purple
+    border-bottom: 1px solid $gray
     flex: 0 0
-    padding: 5px 0
+    padding: 6px 0
     border-radius($radius-size $radius-size 0 0)
 
     h4 {
-      color: $white
+      color: $purple
       margin: 0
       opacity: 0.5
       text-align: center

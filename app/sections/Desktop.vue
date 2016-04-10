@@ -5,35 +5,57 @@
       :item="window"
       :class="{ 'active': activeWindow === window }"
       :actions="{ click: setActiveWindow }">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <component
+        :is="window.path">
+      </component>
+      <pre>{{ selectedAppIndex }}</pre>
     </window>
   </section>
 </template>
 
 <script>
 import Window from '../components/Window'
-import { setActiveWindow } from '../vuex/actions'
+import Commander from '../apps/Commander'
+import Writer from '../apps/Writer'
+import {
+  setActiveWindow,
+  setSelectedApp,
+  splitWindow
+} from '../vuex/actions'
 
 export default {
   vuex: {
     getters: {
       windows: state => state.windows,
       activeWindow: state => state.activeWindow,
-      wallpaper: state => state.wallpaper
+      wallpaper: state => state.wallpaper,
+      apps: state => state.apps,
+      selectedApp: state => state.selectedApp,
+      activeApps: state => state.activeApps
     },
     actions: {
-      setActiveWindow
+      setActiveWindow,
+      setSelectedApp,
+      splitWindow
     }
   },
 
   components: {
-    Window
+    Window,
+    Commander,
+    Writer
+  },
+
+  created () {
+    const selectedApp = this.apps[0]
+    this.setSelectedApp(selectedApp)
+    this.splitWindow(this.selectedApp, 'up')
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-@import '../mixins' 
+@import '../mixins'
 
 section {
   background-repeat: no-repeat

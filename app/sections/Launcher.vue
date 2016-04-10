@@ -3,6 +3,7 @@
     <ul>
       <icon
         v-for="app in apps"
+        @event-name="openWindow"
         :item="app"
         :selected="selectedApp"
         :actions="appActions">
@@ -38,6 +39,7 @@ export default {
   vuex: {
     getters: {
       apps: state => state.apps,
+      activeApps: state => state.activeApps,
       menuPosition: state => {
         return {
           x: state.menu.x,
@@ -96,7 +98,17 @@ export default {
     }
   },
 
+  events: {
+    'open-window': function () {
+      console.log('openWindow')
+    }
+  },
+
   methods: {
+    parentMethod () {
+      console.log('WORKED')
+    },
+
     openMenuStart (app, ev) {
       const menu = this.$els.menu
       const x = ev.clientX

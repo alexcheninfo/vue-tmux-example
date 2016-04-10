@@ -8,6 +8,7 @@ const state = {
   menuItems: [],
   wallpaper: {},
   selectedApp: {},
+  activeApps: [],
   activeWindow: {},
   isMenuVisible: false,
   menu: {
@@ -38,6 +39,10 @@ const mutations = {
     state.activeWindow = win
   },
 
+  SET_FOCUSED_APP (state, app) {
+    state.focusedApp = app
+  },
+
   OPEN_MENU (state) {
     state.isMenuVisible = true
   },
@@ -54,9 +59,14 @@ const mutations = {
   OPEN_WINDOW (state, app, direction) {
     const window = {
       title: app.name,
-      color: app.color
+      color: app.color,
+      path: app.path
     }
     state.windows.push(window)
+  },
+
+  OPEN_APP (state, app) {
+    state.activeApps.push(app)
   }
 }
 

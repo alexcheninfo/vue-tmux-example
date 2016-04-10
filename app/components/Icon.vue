@@ -1,7 +1,7 @@
 <template>
   <li :class="{ 'selected': selected === item }">
     <a
-      @click="actions && actions.click ? actions.click(item) : null"
+      @click="openWindow(item)"
       @mouseover="actions && actions.mouseover ? actions.mouseover(item) : null"
       @mouseout="actions && actions.mouseout ? actions.mouseout() : null"
       @contextmenu.prevent="actions && actions.contextmenu
@@ -40,6 +40,12 @@ export default {
         type: Function,
         required: false
       }
+    }
+  },
+
+  methods: {
+    openWindow (item) {
+      this.$dispatch('event-name', item)
     }
   }
 }
