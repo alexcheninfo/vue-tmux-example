@@ -4,7 +4,7 @@
     v-show="show"
     tabindex="-1"
     :style="{ top: position.y + 'px', left: position.x + 'px' }"
-    @focusout="actions && actions.focusout ? actions.focusout() : null">
+    @focusout="onFocusout">
     <slot></slot>
   </ul>
 </template>
@@ -25,10 +25,12 @@ export default {
         type: Number,
         default: 0
       }
-    },
-    actions: {
-      focusout: Function,
-      required: false
+    }
+  },
+
+  methods: {
+    onFocusout () {
+      this.$dispatch('on-focusout')
     }
   }
 }

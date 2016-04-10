@@ -1,12 +1,10 @@
 <template>
   <li :class="{ 'selected': selected === item }">
     <a
-      @click="openWindow(item)"
-      @mouseover="actions && actions.mouseover ? actions.mouseover(item) : null"
-      @mouseout="actions && actions.mouseout ? actions.mouseout() : null"
-      @contextmenu.prevent="actions && actions.contextmenu
-        ? actions.contextmenu(item, $event)
-        : null">
+      @click="onClick(item)"
+      @mouseover="onMouseover(item)"
+      @mouseout="onMouseout()"
+      @contextmenu.prevent="onContextmenu(item, $event)">
       <img :src="item.icon">
     </a>
   </li>
@@ -22,30 +20,21 @@ export default {
     selected: {
       type: Object,
       required: false
-    },
-    actions: {
-      click: {
-        type: Function,
-        required: false
-      },
-      mouseover: {
-        type: Function,
-        required: false
-      },
-      mouseout: {
-        type: Function,
-        required: false
-      },
-      contextmenu: {
-        type: Function,
-        required: false
-      }
     }
   },
 
   methods: {
-    openWindow (item) {
-      this.$dispatch('event-name', item)
+    onClick (item) {
+      this.$dispatch('on-click', item)
+    },
+    onMouseover (item) {
+      this.$dispatch('on-mouseover', item)
+    },
+    onMouseout (item) {
+      this.$dispatch('on-mouseout', item)
+    },
+    onContextmenu (item, event) {
+      this.$dispatch('on-contextmenu', item, event)
     }
   }
 }

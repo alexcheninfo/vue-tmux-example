@@ -5,7 +5,7 @@
       track-by="$index"
       :item="openApp"
       :class="{ 'active': activeApp === openApp }"
-      :actions="{ click: setActiveApp }">
+      @on-click="setActiveApp">
       <component
         :is="openApp.path">
       </component>
@@ -19,7 +19,8 @@ import Commander from '../apps/Commander'
 import Writer from '../apps/Writer'
 import {
   setSelectedApp,
-  openApp
+  openApp,
+  setActiveApp
 } from '../vuex/actions'
 
 export default {
@@ -33,7 +34,8 @@ export default {
     },
     actions: {
       setSelectedApp,
-      openApp
+      openApp,
+      setActiveApp
     }
   },
 

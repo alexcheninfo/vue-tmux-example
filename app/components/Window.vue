@@ -1,8 +1,6 @@
 <template>
   <!-- <article v-draggable> -->
-  <article
-    @click="actions && actions.click ? actions.click(item) : null"
-    transition>
+  <article @click="onclick(item)" transition>
     <header>
       <h4>
         <i class="fa fa-circle" :style="'color:' + item.color"></i>
@@ -21,12 +19,12 @@ export default {
     item: {
       type: Object,
       required: true
-    },
-    actions: {
-      click: {
-        type: Function,
-        required: false
-      }
+    }
+  },
+
+  methods: {
+    onClick (item) {
+      this.$dispatch('on-click', item)
     }
   }
 }

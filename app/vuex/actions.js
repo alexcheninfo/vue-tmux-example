@@ -53,3 +53,7 @@ export const openApp = ({ dispatch, state }, app, direction) => {
   const newestApp = state.openApps[state.openApps.length - 1]
   dispatch('SET_ACTIVE_APP', newestApp)
 }
+
+export const setActiveApp = ({ dispatch, state }, app) => {
+  dispatch('SET_ACTIVE_APP', app)
+}

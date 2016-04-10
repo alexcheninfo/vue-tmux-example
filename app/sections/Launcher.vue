@@ -3,16 +3,18 @@
     <ul>
       <icon
         v-for="app in apps"
-        @event-name="openApp"
         :item="app"
         :selected="selectedApp"
-        :actions="appActions">
+        @on-click="openApp"
+        @on-mouseover="setSelectedApp"
+        @on-mouseout="unsetSelectedApp"
+        @on-contextmenu="openMenuStart">
       </icon>
       <menu
         v-el:menu
         :show="isMenuVisible"
         :position="menuPosition"
-        :actions="{ focusout: closeMenu }">
+        @on-focusout="closeMenu">
         <menu-item v-for="menuItem in menuItems" :menu-item="menuItem">
         </menu-item>
       </menu>
@@ -39,9 +41,9 @@ export default {
   vuex: {
     getters: {
       apps: state => state.apps,
-      openApps: state => {
-        return state.apps.find(app => app.state === 'open')
-      },
+      // openApps: state => {
+      //   return state.apps.find(app => app.state === 'open')
+      // },
       activeApps: state => state.activeApps,
       menuPosition: state => {
         return {
@@ -72,11 +74,6 @@ export default {
 
   data () {
     return {
-      appActions: {
-        mouseover: this.setSelectedApp,
-        mouseout: this.unsetSelectedApp,
-        contextmenu: this.openMenuStart
-      },
       menuItems: [
         {
           name: 'Split up',
