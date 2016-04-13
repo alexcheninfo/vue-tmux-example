@@ -1,5 +1,7 @@
 <template>
-  <div :class="{ 'flex': model.direction }" :style="itemStyle">
+  <div
+    :class="{ 'container': isContainer, 'active': isActive }"
+    :style="itemStyle">
     <header v-if="!model.children">
       <h4>
         <i class="fa fa-circle" :style="'color:' + model.color"></i>
@@ -11,7 +13,9 @@
     <!-- <iframe v-if="!model.children" :src="model.path"></iframe> -->
     <window
       v-for="model in model.children"
-      :model="model">
+      :model="model"
+      :active-model="activeModel"
+      @click.stop="onClick(model)">
       <!-- <slot></slot> -->
     </window>
   </div>
@@ -21,7 +25,8 @@
 export default {
   name: 'Window',
   props: {
-    model: Object
+    model: Object,
+    activeModel: Object
   },
 
   data () {
@@ -30,6 +35,22 @@ export default {
         flexDirection: this.model.direction,
         background: this.model.color
       }
+    }
+  },
+
+  computed: {
+    isContainer () {
+      return this.model.direction
+    },
+
+    isActive () {
+      return this.model === this.activeModel
+    }
+  },
+
+  methods: {
+    onClick (item) {
+      this.$dispatch('on-click', item)
     }
   }
 }
@@ -44,12 +65,10 @@ div {
   flex: 1
   flex-direction: column
   margin: 5px
-  border-radius($radius-size + 2) // two more pixels to hide the top border
-  box-shadow(0 $shadow-size)
 
   header {
     border-bottom: 1px solid $gray
-    flex: 0
+    flex: 0 0 // to prevent shrinking when high number of items
     padding: 6px 0
     border-radius($radius-size $radius-size 0 0)
 
@@ -64,10 +83,21 @@ div {
       }
     }
   }
-}
 
-.flex {
-  display: flex
-  margin: 0
+  &.active {
+    h4 {
+      opacity: 1
+    }
+  }
+
+  &.container {
+    display: flex
+    margin: 0
+  }
+
+  &:not(.container) {
+    border-radius($radius-size + 2) // two more pixels to hide the top border
+    box-shadow(0 $shadow-size)
+  }
 }
 </style>

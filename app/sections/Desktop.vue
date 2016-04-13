@@ -8,7 +8,10 @@
       @on-click="setActiveApp">
       <component :is="openApp.path"></component>
     </window> -->
-    <window :model="tree">
+    <window
+      :model="tree"
+      :active-model="activeApp"
+      @on-click="setActiveApp">
       <!-- <component v-for="item in tree.children[1].children" :is="item.path"></component> -->
     </window>
     <!-- <pre>{{ tree | json }}</pre> -->
@@ -17,8 +20,6 @@
 
 <script>
 import Window from '../components/Window'
-import Commander from '../apps/Commander'
-import Writer from '../apps/Writer'
 import {
   wallpaper,
   apps,
@@ -48,24 +49,25 @@ export default {
     return {
       tree: {
         name: 'orange',
-        color: 'none',
+        color: 'orange',
         direction: 'column',
         path: 'commander',
         children: [
-          { name: 'red', color: 'white', path: 'writer' },
+          { name: 'red', color: 'red', path: 'writer' },
+          { name: 'white', color: 'white', path: 'commander' },
           {
             name: 'blue',
-            color: 'none',
+            color: 'blue',
             direction: 'row',
             path: 'writer',
             children: [
               {
                 name: 'green',
-                color: 'none',
+                color: 'green',
                 direction: 'column',
                 path: 'writer',
                 children: [
-                  { name: 'black', color: 'white', path: 'writer' },
+                  { name: 'black', color: 'black', path: 'writer' },
                   { name: 'white', color: 'white', path: 'commander' }
                 ]
               },
@@ -84,15 +86,13 @@ export default {
   },
 
   components: {
-    Window,
-    Commander,
-    Writer
+    Window
   },
 
   created () {
-    const selectedApp = this.apps[0]
-    this.setSelectedApp(selectedApp)
-    this.openApp(this.selectedApp)
+    const activeApp = this.apps[0]
+    this.setActiveApp(activeApp)
+    // this.openApp(this.selectedApp)
   }
 }
 </script>

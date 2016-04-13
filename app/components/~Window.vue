@@ -68,7 +68,7 @@ article {
   section {
     flex: 1 1
     padding: 10px
-    overflow-y: scroll
+    overflow: scroll
 
     &::-webkit-scrollbar {
       width: 10px
