@@ -10,7 +10,6 @@ const state = {
   menuItems: [],
   wallpaper: {},
   selectedApp: {},
-  activeApps: [],
   isMenuVisible: false,
   menu: {
     x: 0,

@@ -7,7 +7,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['', '.js', '.vue', '.styl']
+    extensions: ['', '.js', '.vue', '.html', '.styl']
   },
   resolveLoader: {
     root: path.join(__dirname, 'node_modules')
@@ -54,10 +54,17 @@ module.exports = {
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader'
+      },
+      {
+        test: /\.html$/,
+        loader: 'file-loader'
       }
     ]
   },
   eslint: {
     formatter: require('eslint-friendly-formatter')
+  },
+  htmlLoader: {
+    ignoreCustomFragments: [/\{\{.*?}}/]
   }
 }

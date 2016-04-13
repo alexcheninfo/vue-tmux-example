@@ -1,30 +1,35 @@
 <template>
-  <!-- <article v-draggable> -->
-  <article @click="onClick(item)" transition>
-    <header>
+  <div :class="{ 'flex': model.direction }" :style="itemStyle">
+    <header v-if="!model.children">
       <h4>
-        <i class="fa fa-circle" :style="'color:' + item.color"></i>
-        {{ item.name }}
+        <i class="fa fa-circle" :style="'color:' + model.color"></i>
+        {{ model.name }}
       </h4>
     </header>
-    <section>
-      <slot></slot>
-    </section>
-  </article>
+    <!-- <slot v-if="!model.children"></slot> -->
+    <component v-if="!model.children" :is="model.path"></component>
+    <!-- <iframe v-if="!model.children" :src="model.path"></iframe> -->
+    <window
+      v-for="model in model.children"
+      :model="model">
+      <!-- <slot></slot> -->
+    </window>
+  </div>
 </template>
 
 <script>
 export default {
+  name: 'Window',
   props: {
-    item: {
-      type: Object,
-      required: true
-    }
+    model: Object
   },
 
-  methods: {
-    onClick (item) {
-      this.$dispatch('on-click', item)
+  data () {
+    return {
+      itemStyle: {
+        flexDirection: this.model.direction,
+        background: this.model.color
+      }
     }
   }
 }
@@ -34,24 +39,17 @@ export default {
 @import '../variables'
 @import '../mixins'
 
-article {
-  background-color: $white
+div {
   display: flex
+  flex: 1
   flex-direction: column
-  flex: 1 1
-  margin-top: 15px
-  margin-right: 15px
-  /*margin-bottom: 15px*/
-  margin-left: 15px // Launcher's width plus margin
-  /*position: absolute*/
-  /*top: 0
-  bottom: 0*/
+  margin: 5px
   border-radius($radius-size + 2) // two more pixels to hide the top border
   box-shadow(0 $shadow-size)
 
   header {
     border-bottom: 1px solid $gray
-    flex: 0 0
+    flex: 0
     padding: 6px 0
     border-radius($radius-size $radius-size 0 0)
 
@@ -64,37 +62,12 @@ article {
       i {
         margin: 0 5px 0 0
       }
-
     }
   }
+}
 
-  section {
-    flex: 1 1
-    padding: 10px
-    overflow-y: scroll
-
-    &::-webkit-scrollbar {
-      width: 10px
-      background: #ddd
-
-      &-track {
-        background-color: #ddd
-      }
-
-      &-thumb {
-        background-color: #bbb
-        border-radius: 50px
-      }
-    }
-  }
-
-  &.active {
-    h4 {
-      opacity: 1
-    }
-  }
-
-  v-transition($transition-duration)
-  v-scale-transition($transition-size)
+.flex {
+  display: flex
+  margin: 0
 }
 </style>

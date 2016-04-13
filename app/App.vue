@@ -1,6 +1,6 @@
 <template>
   <main>
-    <launcher></launcher>
+    <!-- <launcher></launcher> -->
     <desktop></desktop>
   </main>
 </template>

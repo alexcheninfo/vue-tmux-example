@@ -20,7 +20,6 @@
       </menu>
     </ul>
   </nav>
-  <pre>{{ openApps | json }}</pre>
 </template>
 
 <script>
