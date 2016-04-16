@@ -9,7 +9,11 @@
       </h4>
     </header>
     <!-- <slot v-if="!model.children"></slot> -->
-    <component v-if="!model.children" :is="model.path"></component>
+    <component
+      v-if="!model.children"
+      :is="model.path"
+      :data="model.data">
+    </component>
     <!-- <iframe v-if="!model.children" :src="model.path"></iframe> -->
     <window
       v-for="model in model.children"

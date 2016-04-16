@@ -58,3 +58,7 @@ export const setActiveApp = ({ dispatch, state }, app) => {
 // function insertBeforeApp (state, activeAppIndex, mockApp) {
 //   state.apps.children.splice(activeAppIndex, 0, mockApp)
 // }
+
+export const updateData = ({ dispatch }, e) => {
+  dispatch('UPDATE_DATA', e.target.value)
+}

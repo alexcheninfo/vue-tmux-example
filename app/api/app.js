@@ -4,7 +4,12 @@ export const mockApps = {
   direction: 'column',
   children: [
     { name: 'red', color: 'red', path: 'writer' },
-    { name: 'white', color: 'white', path: 'commander' },
+    {
+      name: 'white',
+      color: 'white',
+      path: 'commander',
+      data: 'white data'
+    },
     {
       name: 'green',
       color: 'green',
@@ -16,7 +21,12 @@ export const mockApps = {
           direction: 'column',
           children: [
             { name: 'red', color: 'red', path: 'writer' },
-            { name: 'white', color: 'white', path: 'commander' }
+            {
+              name: 'white',
+              color: 'white',
+              path: 'commander',
+              data: 'white data 2'
+            }
           ]
         },
         {

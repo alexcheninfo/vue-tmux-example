@@ -90,10 +90,15 @@ const mutations = {
     // search active app in apps
     // insert app below active app
     // state.openApps.push(app)
+  },
+
+  UPDATE_DATA (state, data) {
+    state.activeApp.data = data
   }
 }
 
 export default new Vuex.Store({
   state,
-  mutations
+  mutations,
+  strict: true
 })

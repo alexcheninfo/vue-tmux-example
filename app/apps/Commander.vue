@@ -1,17 +1,24 @@
 <template>
   <div>
-    <!-- <input type="text"> -->
-    <input type="text" v-model="model">
+    <input :value="data" @input="updateData">
     {{ model | json }}
   </div>
 </template>
 
 <script>
+import {
+  updateData
+} from '../vuex/actions'
+
 export default {
-  data () {
-    return {
-      model: ''
+  vuex: {
+    actions: {
+      updateData
     }
+  },
+
+  props: {
+    data: String
   }
 }
 </script>
