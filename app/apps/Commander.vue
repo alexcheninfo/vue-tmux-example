@@ -1,9 +1,20 @@
 <template>
   <div>
     <!-- <input type="text"> -->
-    <textarea name="name" rows="30" cols="20"></textarea>
+    <input type="text" v-model="model">
+    {{ model | json }}
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      model: ''
+    }
+  }
+}
+</script>
 
 <style lang="stylus" scoped>
  div {

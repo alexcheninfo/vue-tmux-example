@@ -51,8 +51,45 @@ const mutations = {
     state.menu.y = y
   },
 
-  OPEN_APP (state, app) {
-    state.openApps.push(app)
+  OPEN_APP (state, app, direction) {
+    // console.log(state.activeApp)
+    // console.log(state.apps.children)
+
+    console.log(direction)
+    const activeAppIndex = state.apps.children.indexOf(state.activeApp)
+    // const mockApp = {
+    //   name: 'black',
+    //   color: 'black',
+    //   path: 'writer'
+    // }
+    const container = {
+      name: 'container',
+      color: 'purple',
+      direction: 'row',
+      children: [
+        { name: 'cyan', color: 'cyan', path: 'writer' }
+      ]
+    }
+
+    container.children.push(state.activeApp)
+
+    // INSERT LEFT OR RIGHT
+
+    state.apps.children.splice(activeAppIndex, 0, container)
+    // needs the + 1 because the activeApp goes down a position
+    state.apps.children.splice(activeAppIndex + 1, 1)
+
+    // INSERT UP AND DOWN
+
+    // Insert before active app
+    // state.apps.children.splice(activeAppIndex, 0, mockApp)
+
+    // Insert after active app
+    // state.apps.children.splice(activeAppIndex + 1, 0, mockApp)
+
+    // search active app in apps
+    // insert app below active app
+    // state.openApps.push(app)
   }
 }
 

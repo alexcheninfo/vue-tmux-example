@@ -45,10 +45,16 @@ export const setMenuCoors = ({ dispatch }, x, y) => {
 
 export const openApp = ({ dispatch, state }, app, direction) => {
   dispatch('OPEN_APP', app, direction)
-  const newestApp = state.openApps[state.openApps.length - 1]
-  dispatch('SET_ACTIVE_APP', newestApp)
+  dispatch('CLOSE_MENU')
+
+  // const newestApp = state.openApps[state.openApps.length - 1]
+  // dispatch('SET_ACTIVE_APP', newestApp)
 }
 
 export const setActiveApp = ({ dispatch, state }, app) => {
   dispatch('SET_ACTIVE_APP', app)
 }
+
+// function insertBeforeApp (state, activeAppIndex, mockApp) {
+//   state.apps.children.splice(activeAppIndex, 0, mockApp)
+// }

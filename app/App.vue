@@ -46,7 +46,6 @@ export default {
 @import './global'
 
 body {
-  background-color: $dark-brown
   color: $black
   font-size: 16px
   line-height: 1.4

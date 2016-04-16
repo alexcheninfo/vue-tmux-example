@@ -9,90 +9,116 @@
       <component :is="openApp.path"></component>
     </window> -->
     <window
-      :model="tree"
+      :model="apps"
       :active-model="activeApp"
-      @on-click="setActiveApp">
+      @on-click="setActiveApp"
+      @on-contextmenu="openMenuStart">
       <!-- <component v-for="item in tree.children[1].children" :is="item.path"></component> -->
     </window>
-    <!-- <pre>{{ tree | json }}</pre> -->
+    <menu
+      v-el:menu
+      :show="isMenuVisible"
+      :position="menuPosition"
+      @on-focusout="closeMenu">
+      <menu-item v-for="menuItem in menuItems" :menu-item="menuItem">
+      </menu-item>
+    </menu>
   </section>
 </template>
 
 <script>
 import Window from '../components/Window'
+import Menu from '../components/Menu'
+import MenuItem from '../components/MenuItem'
 import {
   wallpaper,
   apps,
   openApps,
   selectedApp,
-  activeApp
+  activeApp,
+  isMenuVisible,
+  menuPosition
 } from '../vuex/getters'
-import { setSelectedApp, openApp, setActiveApp } from '../vuex/actions'
+
+import {
+  setSelectedApp,
+  openApp,
+  setActiveApp,
+  openMenu,
+  closeMenu,
+  setMenuCoors
+} from '../vuex/actions'
 
 export default {
   vuex: {
     getters: {
-      wallpaper: wallpaper,
-      apps: apps,
-      openApps: openApps,
-      selectedApp: selectedApp,
-      activeApp: activeApp
+      wallpaper,
+      apps,
+      openApps,
+      selectedApp,
+      activeApp,
+      isMenuVisible,
+      menuPosition
     },
     actions: {
       setSelectedApp,
       openApp,
-      setActiveApp
-    }
-  },
-
-  data () {
-    return {
-      tree: {
-        name: 'orange',
-        color: 'orange',
-        direction: 'column',
-        path: 'commander',
-        children: [
-          { name: 'red', color: 'red', path: 'writer' },
-          { name: 'white', color: 'white', path: 'commander' },
-          {
-            name: 'blue',
-            color: 'blue',
-            direction: 'row',
-            path: 'writer',
-            children: [
-              {
-                name: 'green',
-                color: 'green',
-                direction: 'column',
-                path: 'writer',
-                children: [
-                  { name: 'black', color: 'black', path: 'writer' },
-                  { name: 'white', color: 'white', path: 'commander' }
-                ]
-              },
-              { name: 'yellow', color: 'white', path: 'commander' }
-            ]
-          }
-        ]
-      }
-    }
-  },
-
-  computed: {
-    isFolder: function () {
-      return this.tree.children && this.tree.children.length
+      setActiveApp,
+      openMenu,
+      closeMenu,
+      setMenuCoors
     }
   },
 
   components: {
-    Window
+    Window,
+    Menu,
+    MenuItem
+  },
+
+  data () {
+    return {
+      menuItems: [
+        {
+          name: 'Split up',
+          action: () => { return this.openApp(this.activeApp, 'up') }
+        },
+        {
+          name: 'Split down',
+          action: () => { return this.openApp(this.selectedApp, 'down') }
+        },
+        {
+          name: 'Split left',
+          action: () => { return this.openApp(this.selectedApp, 'left') }
+        },
+        {
+          name: 'Split right',
+          action: () => { return this.openApp(this.selectedApp, 'right') }
+        }
+      ]
+    }
   },
 
   created () {
-    const activeApp = this.apps[0]
+    const activeApp = this.apps.children[0]
     this.setActiveApp(activeApp)
     // this.openApp(this.selectedApp)
+  },
+
+  methods: {
+    // TODO turn this into smaller functions or Vuex action
+    openMenuStart (app, ev) {
+      const menu = this.$els.menu
+      const x = ev.clientX
+      const y = ev.clientY
+      this.setMenuCoors(x, y)
+      this.openMenu()
+      // $nextTick is needed to make focus() work
+      this.$nextTick(() => {
+        menu.focus()
+      })
+      this.setSelectedApp(app)
+    }
   }
 }
 </script>

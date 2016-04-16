@@ -41,13 +41,13 @@ export default {
 @import '../mixins'
 
 ul {
-  background: $dark-gray
+  background: $black
   padding: 0
   outline: none // to remove focus glow
   overflow: hidden // to preserve border radius on hover
   position: absolute
   white-space: nowrap
-  z-index: 9999
+  z-index: 1
   list-style($style-type)
   border-radius($radius-size)
   box-shadow(0 $shadow-size)

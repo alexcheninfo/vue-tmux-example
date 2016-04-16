@@ -1,26 +1,37 @@
-export const mockApps = [
-  {
-    icon: require('../assets/images/icon-1.png'),
-    name: 'App 1',
-    color: '#eb885d',
-    state: 'closed',
-    path: 'commander'
-  },
-  {
-    icon: require('../assets/images/icon-2.png'),
-    name: 'App 2',
-    color: '#b9394b',
-    state: 'closed',
-    path: 'writer'
-  },
-  {
-    icon: require('../assets/images/icon-3.png'),
-    name: 'App 3',
-    color: '#720e34',
-    state: 'closed',
-    path: 'commander'
-  }
-]
+export const mockApps = {
+  name: 'orange',
+  color: 'orange',
+  direction: 'column',
+  children: [
+    { name: 'red', color: 'red', path: 'writer' },
+    { name: 'white', color: 'white', path: 'commander' },
+    {
+      name: 'green',
+      color: 'green',
+      direction: 'row',
+      children: [
+        {
+          name: 'yellow',
+          color: 'yellow',
+          direction: 'column',
+          children: [
+            { name: 'red', color: 'red', path: 'writer' },
+            { name: 'white', color: 'white', path: 'commander' }
+          ]
+        },
+        {
+          name: 'green',
+          color: 'green',
+          direction: 'column',
+          children: [
+            { name: 'red', color: 'red', path: 'writer' }
+          ]
+        }
+      ]
+    },
+    { name: 'gray', color: 'gray', path: 'commander' }
+  ]
+}
 
 export const mockWallpaper = [
   {

@@ -15,7 +15,8 @@
       v-for="model in model.children"
       :model="model"
       :active-model="activeModel"
-      @click.stop="onClick(model)">
+      @click.stop="onClick(model)"
+      @contextmenu.stop.prevent="onContextmenu(model, $event)">
       <!-- <slot></slot> -->
     </window>
   </div>
@@ -50,6 +51,11 @@ export default {
 
   methods: {
     onClick (item) {
+      this.$dispatch('on-click', item)
+    },
+
+    onContextmenu (item, event) {
+      this.$dispatch('on-contextmenu', item, event)
       this.$dispatch('on-click', item)
     }
   }

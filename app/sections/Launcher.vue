@@ -10,14 +10,6 @@
         @on-mouseout="unsetSelectedApp"
         @on-contextmenu="openMenuStart">
       </icon>
-      <menu
-        v-el:menu
-        :show="isMenuVisible"
-        :position="menuPosition"
-        @on-focusout="closeMenu">
-        <menu-item v-for="menuItem in menuItems" :menu-item="menuItem">
-        </menu-item>
-      </menu>
     </ul>
   </nav>
 </template>
