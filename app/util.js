@@ -1,6 +1,6 @@
 const _ = {}
 
-// Common
+// Checkers
 
 _.isString = function (val) {
   return typeof val === 'string'
@@ -18,8 +18,18 @@ _.isFunction = function (val) {
   return typeof val === 'function'
 }
 
+// Common
+
 _.keys = (obj) => {
   return Object.keys(obj)
+}
+
+_.insertBefore = (arr, obj, newObj) => {
+  return arr.splice(arr.indexOf(obj), 0, newObj)
+}
+
+_.insertAfter = (arr, obj, newObj) => {
+  return arr.splice(arr.indexOf(obj) + 1, 0, newObj)
 }
 
 // For recursive arrays
@@ -37,34 +47,34 @@ _.findDeep = (arr, obj) => {
 
 _.insertUpDeep = (arr, obj, newObj) => {
   const found = _.findDeep(arr, obj)
-  if (found) found.splice(found.indexOf(obj), 0, newObj)
+  if (found) _.insertBefore(found, obj, newObj)
   return arr
 }
 
 _.insertDownDeep = (arr, obj, newObj) => {
   const found = _.findDeep(arr, obj)
-  if (found) found.splice(found.indexOf(obj) + 1, 0, newObj)
+  if (found) _.insertAfter(found, obj, newObj)
   return arr
 }
 
-_.insertLeftDeep = (arr, newArr, obj, newObj) => {
+_.insertLeftDeep = (arr, obj, newObj, contObj) => {
   const found = _.findDeep(arr, obj)
   if (found) {
+    contObj.children.push(newObj)
+    contObj.children.push(obj)
+    _.insertBefore(found, obj, contObj)
     found.splice(found.indexOf(obj), 1) // to avoid duplicating obj
-    newArr.children.push(newObj)
-    newArr.children.push(obj)
-    found.splice(found.indexOf(obj), 0, newArr)
   }
   return arr
 }
 
-_.insertRightDeep = (arr, newArr, obj, newObj) => {
+_.insertRightDeep = (arr, obj, newObj, contObj) => {
   const found = _.findDeep(arr, obj)
   if (found) {
+    contObj.children.push(obj)
+    contObj.children.push(newObj)
+    _.insertBefore(found, obj, contObj)
     found.splice(found.indexOf(obj), 1) // to avoid duplicating obj
-    newArr.children.push(obj)
-    newArr.children.push(newObj)
-    found.splice(found.indexOf(obj), 0, newArr)
   }
   return arr
 }

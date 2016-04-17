@@ -71,10 +71,10 @@ const mutations = {
       _.insertDownDeep(state.apps.children, state.activeApp, mockApp)
     }
     if (direction === 'left') {
-      _.insertLeftDeep(state.apps.children, container, state.activeApp, mockApp)
+      _.insertLeftDeep(state.apps.children, state.activeApp, mockApp, container)
     }
     if (direction === 'right') {
-      _.insertRightDeep(state.apps.children, container, state.activeApp, mockApp)
+      _.insertRightDeep(state.apps.children, state.activeApp, mockApp, container)
     }
   },
 

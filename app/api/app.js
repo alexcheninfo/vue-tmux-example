@@ -4,8 +4,8 @@ export const mockApps = {
   direction: 'column',
   children: [
     {
-      name: 'white',
-      color: 'white',
+      name: 'brown',
+      color: 'brown',
       path: 'commander',
       data: 'white data'
     },
