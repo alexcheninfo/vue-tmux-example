@@ -3,7 +3,6 @@ export const mockApps = {
   color: 'orange',
   direction: 'column',
   children: [
-    { name: 'red', color: 'red', path: 'writer' },
     {
       name: 'white',
       color: 'white',
@@ -20,7 +19,11 @@ export const mockApps = {
           color: 'yellow',
           direction: 'column',
           children: [
-            { name: 'red', color: 'red', path: 'writer' },
+            {
+              name: 'red',
+              color: 'red',
+              path: 'writer'
+            },
             {
               name: 'white',
               color: 'white',
@@ -34,7 +37,7 @@ export const mockApps = {
           color: 'green',
           direction: 'column',
           children: [
-            { name: 'red', color: 'red', path: 'writer' }
+            { name: 'purple', color: 'purple', path: 'writer' }
           ]
         }
       ]
