@@ -60,8 +60,8 @@ _.insertDownDeep = (arr, obj, newObj) => {
 _.insertLeftDeep = (arr, obj, newObj, contObj) => {
   const found = _.findDeep(arr, obj)
   if (found) {
-    contObj.children.push(newObj)
-    contObj.children.push(obj)
+    contObj.children[1].children.push(obj)
+    contObj.children[0].children.push(newObj)
     _.insertBefore(found, obj, contObj)
     found.splice(found.indexOf(obj), 1) // to avoid duplicating obj
   }
@@ -71,8 +71,8 @@ _.insertLeftDeep = (arr, obj, newObj, contObj) => {
 _.insertRightDeep = (arr, obj, newObj, contObj) => {
   const found = _.findDeep(arr, obj)
   if (found) {
-    contObj.children.push(obj)
-    contObj.children.push(newObj)
+    contObj.children[0].children.push(obj)
+    contObj.children[1].children.push(newObj)
     _.insertBefore(found, obj, contObj)
     found.splice(found.indexOf(obj), 1) // to avoid duplicating obj
   }

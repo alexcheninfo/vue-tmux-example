@@ -53,16 +53,34 @@ const mutations = {
   },
 
   OPEN_APP (state, app, direction) {
+    const things = ['violet', 'maroon', 'fuchsia', 'pink']
+    const thing = things[Math.floor(Math.random() * things.length)]
+    const things2 = ['cyan', 'darkblue']
+    const thing2 = things2[Math.floor(Math.random() * things2.length)]
+
     const mockApp = {
-      name: 'black',
-      color: 'black',
+      name: thing,
+      color: thing,
       path: 'writer'
     }
     const container = {
       name: 'container',
-      color: 'purple',
+      color: thing,
       direction: 'row',
-      children: []
+      children: [
+        {
+          name: 'container',
+          color: thing2,
+          direction: 'column',
+          children: []
+        },
+        {
+          name: 'container',
+          color: 'black',
+          direction: 'column',
+          children: []
+        }
+      ]
     }
     if (direction === 'up') {
       _.insertUpDeep(state.apps.children, state.activeApp, mockApp)
