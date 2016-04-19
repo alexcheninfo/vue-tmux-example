@@ -1,5 +1,5 @@
 <template>
-  <li :class="{ 'selected': selected === item }">
+  <li :class="{ 'selected': selected.id === item.id }">
     <a
       @click="onClick(item)"
       @mouseover="onMouseover(item)"

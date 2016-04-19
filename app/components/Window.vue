@@ -5,7 +5,7 @@
     <header v-if="!model.children">
       <h4>
         <i class="fa fa-circle" :style="'color:' + model.color"></i>
-        {{ model.name }}
+        {{ model.name }} {{ model.id }}
       </h4>
     </header>
     <!-- <slot v-if="!model.children"></slot> -->
@@ -49,7 +49,7 @@ export default {
     },
 
     isActive () {
-      return this.model === this.activeModel
+      return this.model.id === this.activeModel.id
     }
   },
 

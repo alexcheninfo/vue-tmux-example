@@ -52,47 +52,48 @@ const mutations = {
     state.menu.y = y
   },
 
-  OPEN_APP (state, app, direction) {
-    const things = ['violet', 'maroon', 'fuchsia', 'pink']
-    const thing = things[Math.floor(Math.random() * things.length)]
-    const things2 = ['cyan', 'darkblue']
-    const thing2 = things2[Math.floor(Math.random() * things2.length)]
+  OPEN_APP (state, app, newApp, direction, newCont) {
+    // const things = ['violet', 'maroon', 'fuchsia', 'pink']
+    // const thing = things[Math.floor(Math.random() * things.length)]
+    // const things2 = ['cyan', 'darkblue']
+    // const thing2 = things2[Math.floor(Math.random() * things2.length)]
+    // function makeid () {
+    //   return Math.random().toString(36).slice(-5)
+    // }
 
-    const mockApp = {
-      name: thing,
-      color: thing,
-      path: 'writer'
-    }
-    const container = {
-      name: 'container',
-      color: thing,
-      direction: 'row',
-      children: [
-        {
-          name: 'container',
-          color: thing2,
-          direction: 'column',
-          children: []
-        },
-        {
-          name: 'container',
-          color: 'black',
-          direction: 'column',
-          children: []
-        }
-      ]
-    }
+    // const container = {
+    //   id: makeid(),
+    //   name: 'container',
+    //   color: thing,
+    //   direction: 'row',
+    //   children: [
+    //     {
+    //       id: makeid(),
+    //       name: 'container',
+    //       color: thing2,
+    //       direction: 'column',
+    //       children: []
+    //     },
+    //     {
+    //       id: makeid(),
+    //       name: 'container',
+    //       color: 'black',
+    //       direction: 'column',
+    //       children: []
+    //     }
+    //   ]
+    // }
     if (direction === 'up') {
-      _.insertUpDeep(state.apps.children, state.activeApp, mockApp)
+      _.insertUpDeep(state.apps.children, state.activeApp, newApp)
     }
     if (direction === 'down') {
-      _.insertDownDeep(state.apps.children, state.activeApp, mockApp)
+      _.insertDownDeep(state.apps.children, state.activeApp, newApp)
     }
     if (direction === 'left') {
-      _.insertLeftDeep(state.apps.children, state.activeApp, mockApp, container)
+      _.insertLeftDeep(state.apps.children, state.activeApp, newApp, newCont)
     }
     if (direction === 'right') {
-      _.insertRightDeep(state.apps.children, state.activeApp, mockApp, container)
+      _.insertRightDeep(state.apps.children, state.activeApp, newApp, newCont)
     }
   },
 
@@ -103,6 +104,6 @@ const mutations = {
 
 export default new Vuex.Store({
   state,
-  mutations,
-  strict: true
+  mutations
+  // strict: true
 })

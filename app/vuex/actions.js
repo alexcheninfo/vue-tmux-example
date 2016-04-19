@@ -1,4 +1,6 @@
 import {
+  newApps,
+  newConts,
   mockApps,
   menuItems,
   mockWallpaper
@@ -44,20 +46,16 @@ export const setMenuCoors = ({ dispatch }, x, y) => {
 }
 
 export const openApp = ({ dispatch, state }, app, direction) => {
-  dispatch('OPEN_APP', app, direction)
+  const newApp = newApps[Math.floor(Math.random() * newApps.length)]
+  const newCont = newConts[Math.floor(Math.random() * newConts.length)]
+  dispatch('OPEN_APP', app, newApp, direction, newCont)
+  dispatch('SET_ACTIVE_APP', newApp)
   dispatch('CLOSE_MENU')
-
-  // const newestApp = state.openApps[state.openApps.length - 1]
-  // dispatch('SET_ACTIVE_APP', newestApp)
 }
 
 export const setActiveApp = ({ dispatch, state }, app) => {
   dispatch('SET_ACTIVE_APP', app)
 }
-
-// function insertBeforeApp (state, activeAppIndex, mockApp) {
-//   state.apps.children.splice(activeAppIndex, 0, mockApp)
-// }
 
 export const updateData = ({ dispatch }, e) => {
   dispatch('UPDATE_DATA', e.target.value)

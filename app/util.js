@@ -39,7 +39,7 @@ _.findDeep = (arr, obj) => {
     const key = _.keys(obj)[0]
     if (item[key] === obj[key]) return arr
     if (item.children) return _.findDeep(item.children, obj)
-    return undefined
+    // return undefined
   }).reduce((prev, curr) => {
     return prev || curr
   })
