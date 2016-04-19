@@ -5,7 +5,7 @@
     <header v-if="!model.children">
       <h4>
         <i class="fa fa-circle" :style="'color:' + model.color"></i>
-        {{ model.name }} {{ model.id }}
+        {{ model.name }} - {{ model.id }}
       </h4>
     </header>
     <!-- <slot v-if="!model.children"></slot> -->
@@ -71,6 +71,7 @@ export default {
 @import '../mixins'
 
 div {
+  background: $black !important // testing
   display: flex
   flex: 1
   flex-direction: column
@@ -83,7 +84,7 @@ div {
     border-radius($radius-size $radius-size 0 0)
 
     h4 {
-      color: $purple
+      color: $white
       margin: 0
       opacity: 0.5
       text-align: center
@@ -101,6 +102,7 @@ div {
   }
 
   &.container {
+    background: none !important
     display: flex
     margin: 0
   }

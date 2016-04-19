@@ -1,5 +1,5 @@
 function makecolor () {
-  const things = ['violet', 'maroon', 'fuchsia', 'pink', 'brown', 'purple']
+  const things = ['#eb885d', '#b9394b', '#720e34', '#2c142b']
   const thing = things[Math.floor(Math.random() * things.length)]
   return thing
 }
@@ -10,12 +10,12 @@ function makeid () {
 
 const tempNewApps = []
 function createNewApps () {
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 50; i++) {
     const genApps = {
       id: makeid(),
       name: makecolor(),
       color: makecolor(),
-      path: 'writer'
+      path: 'commander'
     }
     tempNewApps.push(genApps)
   }
@@ -24,7 +24,7 @@ function createNewApps () {
 
 const tempNewConts2 = []
 function createNewConts2 () {
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 30; i++) {
     const genApps = {
       id: makeid(),
       name: 'container',
@@ -40,7 +40,7 @@ const newConts2 = createNewConts2()
 
 const tempNewConts = []
 function createNewConts () {
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 30; i++) {
     const newCont2 = newConts2[Math.floor(Math.random() * newConts2.length)]
     const newCont3 = newConts2[Math.floor(Math.random() * newConts2.length)]
     const genApps = {
@@ -66,63 +66,15 @@ export const newConts = createNewConts()
 export const mockApps = {
   id: makeid(),
   name: 'orange',
-  color: 'orange',
+  color: makecolor(),
   direction: 'column',
   children: [
     {
       id: makeid(),
       name: 'brown',
-      color: 'brown',
+      color: makecolor(),
       path: 'commander',
       data: 'white data'
-    },
-    {
-      id: makeid(),
-      name: 'green',
-      color: 'green',
-      direction: 'row',
-      children: [
-        {
-          id: makeid(),
-          name: 'yellow',
-          color: 'yellow',
-          direction: 'column',
-          children: [
-            {
-              id: makeid(),
-              name: 'red',
-              color: 'red',
-              path: 'writer'
-            },
-            {
-              id: makeid(),
-              name: 'white',
-              color: 'white',
-              path: 'commander',
-              data: 'white data 2'
-            }
-          ]
-        },
-        {
-          id: makeid(),
-          name: 'green',
-          color: 'green',
-          direction: 'column',
-          children: [
-            {
-              id: makeid(),
-              name: 'purple',
-              color: 'purple',
-              path: 'writer' }
-          ]
-        }
-      ]
-    },
-    {
-      id: makeid(),
-      name: 'gray',
-      color: 'gray',
-      path: 'commander'
     }
   ]
 }

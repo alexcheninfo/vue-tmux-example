@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input :value="data" @input="updateData">
+    <input type="text" :value="data" @input="updateData">
     {{ model | json }}
   </div>
 </template>
@@ -24,9 +24,18 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
- div {
-   margin: 0 // see if can remove this
-   padding: 10px
-   overflow-y: scroll
- }
+@import '../variables'
+
+div {
+  color: $white
+  margin: 0 // see if can remove this
+  padding: 10px
+  overflow-y: scroll
+
+  input[type='text'] {
+    background: none
+    border-color: transparent
+    outline: none
+  }
+}
 </style>

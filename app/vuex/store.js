@@ -53,36 +53,6 @@ const mutations = {
   },
 
   OPEN_APP (state, app, newApp, direction, newCont) {
-    // const things = ['violet', 'maroon', 'fuchsia', 'pink']
-    // const thing = things[Math.floor(Math.random() * things.length)]
-    // const things2 = ['cyan', 'darkblue']
-    // const thing2 = things2[Math.floor(Math.random() * things2.length)]
-    // function makeid () {
-    //   return Math.random().toString(36).slice(-5)
-    // }
-
-    // const container = {
-    //   id: makeid(),
-    //   name: 'container',
-    //   color: thing,
-    //   direction: 'row',
-    //   children: [
-    //     {
-    //       id: makeid(),
-    //       name: 'container',
-    //       color: thing2,
-    //       direction: 'column',
-    //       children: []
-    //     },
-    //     {
-    //       id: makeid(),
-    //       name: 'container',
-    //       color: 'black',
-    //       direction: 'column',
-    //       children: []
-    //     }
-    //   ]
-    // }
     if (direction === 'up') {
       _.insertUpDeep(state.apps.children, state.activeApp, newApp)
     }
