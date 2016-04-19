@@ -15,7 +15,8 @@ function createNewApps () {
       id: makeid(),
       name: makecolor(),
       color: makecolor(),
-      path: 'commander'
+      path: 'commander',
+      data: 'Type here'
     }
     tempNewApps.push(genApps)
   }
@@ -74,7 +75,7 @@ export const mockApps = {
       name: 'brown',
       color: makecolor(),
       path: 'commander',
-      data: 'white data'
+      data: 'Type here'
     }
   ]
 }
