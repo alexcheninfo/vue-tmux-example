@@ -78,7 +78,7 @@ div {
   margin: 5px
 
   header {
-    border-bottom: 1px solid $gray
+    border-bottom: 1px solid $alpha-white
     flex: 0 0 // to prevent shrinking when high number of items
     padding: 6px 0
     border-radius($radius-size $radius-size 0 0)
